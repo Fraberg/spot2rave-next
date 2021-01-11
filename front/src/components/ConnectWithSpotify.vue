@@ -23,8 +23,9 @@ export default {
     msg: String
   },
   setup() {
-    console.log('process.env.BASE_URL', process.env.VUE_APP_API_BASE_URL)
-    const loginUrl = `${process.env.VUE_APP_API_BASE_URL}api/spotify/login`
+    const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/' : process.env.VUE_APP_API_BASE_URL
+    const loginUrl = `${baseUrl}api/spotify/login`
+    console.log('loginUrl', loginUrl, '| process.env.NODE_ENV', process.env.NODE_ENV)
     // console.log('loginUrl:', loginUrl)
     return { loginUrl }
   }
