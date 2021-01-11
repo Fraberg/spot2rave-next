@@ -3,6 +3,7 @@
     <div>
         <h1 class="title">spot2rave</h1>
         <p>{{ accesstoken.substr(0, 10) }}</p>
+        <p>{{ getStoreToken }}</p>
         <span v-if="isLoading"></span>
         <div v-else class="results">
             <div
@@ -27,25 +28,27 @@
 </template>
 
 <script>
-import { ref, onBeforeMount, watch, computed, getCurrentInstance } from 'vue'
+import { ref, onBeforeMount, computed } from 'vue'
 import SpotifyService from '@/service/SpotifyService'
 import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default {
   props: ['accesstoken'],
   setup(props) {
     const isLoading = ref(true)
     const topTracks = ref([])
-    // const route = useRoute()
-    // console.log(route)
-    // console.log('route.params', route.params)
-    // console.log('typeof route.params', typeof route.params)
+    const store = useStore()
     onBeforeMount(async () => {
       console.log('onBeforeMount')
       if (props.accesstoken) {
+        setTokenInStore(props.accesstoken)
         topTracks.value = await fetchTopTracks(props.accesstoken)
       }
       isLoading.value = false
+    })
+    const getStoreToken = computed(function() {
+      return store.state.accesToken
     })
     async function fetchTopTracks(token) {
       // console.log('fetchTopTracks | token:', token)
@@ -54,11 +57,16 @@ export default {
       // console.log('data:', JSON.stringify(data))
       return data
     }
+    function setTokenInStore(token) {
+      store.dispatch('setAccessToken', token)
+    }
     return {
       isLoading,
       topTracks,
-      // route,
+      store,
+      getStoreToken,
       fetchTopTracks,
+      setTokenInStore,
     }
   },
 }
