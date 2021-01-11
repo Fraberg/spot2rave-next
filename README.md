@@ -8,6 +8,8 @@ https://stackoverflow.com/questions/65442062/uncaught-typeerror-cannot-read-prop
 https://next.vuex.vuejs.org/guide/composition-api.html#accessing-state-and-getters
 https://github.com/vuejs/vuex/tree/4.0/examples/composition
 
+https://github.com/vuejs/vue-cli/issues/4557
+
 # todo
 - [ ] vuex to store token
 - [ ] plug to songkick

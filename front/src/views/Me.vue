@@ -1,10 +1,10 @@
 <template>
   <div class="me">
     <div>
-        <h1 class="title">spot2rave</h1>
-        <p>{{ accesstoken.substr(0, 10) }}</p>
-        <p>{{ getStoreToken }}</p>
-        <span v-if="isLoading"></span>
+        <h1 class="title">{{ getStoreUser.display_name }}</h1>
+        <!-- <p>props.accesstoken {{ accesstoken.substr(0, 10) }}</p> -->
+        <!-- <p>store.state.accesstoken {{ getStoreToken.substr(0, 10) }}</p> -->
+        <span v-if="isLoading">Loading</span>
         <div v-else class="results">
             <div
             v-for="(top, index) in topTracks"
@@ -43,30 +43,58 @@ export default {
       console.log('onBeforeMount')
       if (props.accesstoken) {
         setTokenInStore(props.accesstoken)
+        // Top Tracks
         topTracks.value = await fetchTopTracks(props.accesstoken)
+        setTopTracksInStore(topTracks.value)
+        // User
+        const user = await fetchUser(props.accesstoken)
+        setUserInStore(user)
       }
       isLoading.value = false
     })
     const getStoreToken = computed(function() {
       return store.state.accesToken
     })
+    const getStoreUser = computed(function() {
+      return store.state.user
+    })
     async function fetchTopTracks(token) {
       // console.log('fetchTopTracks | token:', token)
       // const data = await SpotifyService.getTopTrack(token)
-      const data = await SpotifyService.getMock()
+      const data = await SpotifyService.getMockTopTrack()
+      // console.log('data:', JSON.stringify(data))
+      return data
+    }
+    async function fetchUser(token) {
+      // console.log('fetchTopTracks | token:', token)
+      // const data = await SpotifyService.getUser(token)
+      const data = await SpotifyService.getMockUser()
       // console.log('data:', JSON.stringify(data))
       return data
     }
     function setTokenInStore(token) {
       store.dispatch('setAccessToken', token)
     }
+    function setUserInStore(user) {
+      store.dispatch('setUserInStore', user)
+    }
+    function setTopTracksInStore(topTracks) {
+      store.dispatch('setTopTrackInStore', topTracks)
+    }
     return {
       isLoading,
       topTracks,
       store,
+
       getStoreToken,
+      getStoreUser,
+
       fetchTopTracks,
+      fetchUser,
+
       setTokenInStore,
+      setUserInStore,
+      setTopTracksInStore,
     }
   },
 }
