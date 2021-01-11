@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node back/index.js",
     "dev": "nodemon back/index.js",
-    "sd": "concurrently \"nodemon back/index.js\" \"cd front && npm run serve\""
+    "sd": "concurrently \"nodemon back/index.js\" \"cd front && npm run serve\"",
+    "deploy": "git push origin main && git push heroku"
   },
   "author": "",
   "license": "ISC",
