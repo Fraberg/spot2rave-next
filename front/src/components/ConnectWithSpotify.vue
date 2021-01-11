@@ -23,7 +23,9 @@ export default {
     msg: String
   },
   setup() {
-    const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/' : process.env.VUE_APP_API_BASE_URL
+    const baseUrl = process.env.NODE_ENV === 'development'
+      ? 'http://localhost:5000/'
+      : 'https://spot2rave.herokuapp.com/' // process.env.VUE_APP_API_BASE_URL
     const loginUrl = `${baseUrl}api/spotify/login`
     console.log('loginUrl', loginUrl, '| process.env.NODE_ENV', process.env.NODE_ENV)
     // console.log('loginUrl:', loginUrl)
