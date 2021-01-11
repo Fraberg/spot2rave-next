@@ -2,7 +2,6 @@
   <div id="nav">
     <router-link :to="{ name: 'Home' }">Home</router-link> |
     <router-link :to="{ name: 'About' }">About</router-link> |
-    <!-- <router-link to="/me/abc">Me</router-link> -->
     <router-link :to="{ name: 'Me', params: { accesstoken: 'abc' } }">Me</router-link>
   </div>
   <router-view />

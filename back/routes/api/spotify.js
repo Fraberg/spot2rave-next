@@ -6,7 +6,7 @@ let querystring = require("querystring");
 
 const router = express.Router();
 
-const redirect_uri = process.env.SPOTIFY_REDIRECT_URI || "http://localhost:8888/api/spotify/callback";
+const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
 
 router.get("/login", function(req, res) {
   console.log("/login");
@@ -47,8 +47,8 @@ router.get("/callback", function(req, res) {
     access_token = body.access_token;
     // console.log("access_token:", access_token);
     // 2 ------ send token back to front-end
-    let uri = process.env.CLIENT_RESULT || `http://localhost:${process.env.LOCALHOST_CLIENT_PORT}/#/me`;
-    console.log("redirect uri:", uri  + "/" + access_token);
+    let uri = process.env.CLIENT_ME;
+    // console.log("redirect uri:", uri  + "/" + access_token);
     res.redirect(uri + "/" + access_token);
     // res.redirect(uri + "?access_token=" + access_token);
   });

@@ -23,8 +23,9 @@ export default {
     msg: String
   },
   setup() {
-    const loginUrl = 'http://localhost:8888/api/spotify/login'
-    console.log('loginUrl:', loginUrl)
+    console.log('process.env.BASE_URL', process.env.VUE_APP_API_BASE_URL)
+    const loginUrl = `${process.env.VUE_APP_API_BASE_URL}api/spotify/login`
+    // console.log('loginUrl:', loginUrl)
     return { loginUrl }
   }
 }
