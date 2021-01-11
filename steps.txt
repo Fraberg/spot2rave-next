@@ -1,0 +1,4 @@
+issue on installing vue cli
+https://github.com/vuejs/vue-cli/issues/2862
+$ export PATH=$PATH:/Users/francisberger/.npm-packages/lib/node_modules/@vue/cli/bin
+$ export PATH=$PATH:/Users/francisberger/.npm-packages/bin
