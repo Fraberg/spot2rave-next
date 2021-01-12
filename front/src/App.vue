@@ -131,7 +131,7 @@ body {
 
 .button--green {
   display: inline-block;
-  border-radius: 4px;
+  border-radius: 40px;
   border: 1px solid #3b8070;
   color: #3b8070;
   text-decoration: none;
@@ -155,6 +155,7 @@ body {
   .state {
     text-align: left;
     margin-left: 20px;
+    font-size: 0.9rem;
   }
 
   .lighter {
