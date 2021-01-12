@@ -115,7 +115,7 @@ export default {
 <style lang="scss" scoped>
 .me {
   margin: 0;
-  min-width: 350px;
+  min-width: 300px;
   width: auto;
   max-width: 600px;
   height: 100%;

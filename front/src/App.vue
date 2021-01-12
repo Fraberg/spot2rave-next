@@ -10,8 +10,8 @@
   </div>
   <div id="nav">
     <router-link :to="{ name: 'Home' }">Home</router-link> 
-    <span> | </span>
-    <router-link :to="{ name: 'About' }">About</router-link> 
+    <!-- <span> | </span>
+    <router-link :to="{ name: 'About' }">About</router-link>  -->
     <span v-if="getStoreToken.exists"> | </span>
     <router-link v-if="getStoreToken.exists" :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }">Me</router-link>
     <span v-if="getStoreEventSuggestions.exists"> | </span>
@@ -68,7 +68,7 @@ export default {
       if (getStoreEventSuggestions.value.exists) {
         return getStoreEventSuggestions.value
       } else {
-        return 'connect w/ spotify'
+        return 'feature not implemented'
       }
     }
     return {
@@ -155,12 +155,14 @@ body {
   .state {
     text-align: left;
     margin-left: 20px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    color: #42b983;
   }
 
   .lighter {
     font-weight: lighter;
-    color: #42b983;
+    font-style: italic;
+    color: #2c3e50;
   }
 }
 </style>
