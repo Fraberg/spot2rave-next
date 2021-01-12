@@ -1,6 +1,6 @@
 <template>
   <div class="me">
-    <h1 class="title">{{ getStoreUser.display_name }}</h1>
+    <h1>{{ getStoreUser.display_name }}</h1>
     <!-- <p>props.accesstoken {{ accesstoken.substr(0, 10) }}</p> -->
     <!-- <p>store.state.accesstoken {{ getStoreToken.substr(0, 10) }}</p> -->
     <span v-if="isLoading">Loading</span>
@@ -129,17 +129,17 @@ export default {
 
 /* --------------- */
 
-.title {
-  width: 100%;
-  height: auto;
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 5rem;
-  color: #35495e;
-  letter-spacing: 1px;
-  margin: 0px 0px 20px 0px;
-}
+// .title {
+//   width: 100%;
+//   height: auto;
+//   font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+//   display: block;
+//   font-weight: 300;
+//   font-size: 5rem;
+//   color: #35495e;
+//   letter-spacing: 1px;
+//   margin: 0px 0px 20px 0px;
+// }
 
 .results {
   width: 100%;

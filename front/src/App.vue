@@ -2,10 +2,10 @@
   <div id="store">
     <p><b>Vuex store</b><br></p>
     <p class="state">
-      - token: {{ displayStoreToken() }} <br>
-      - user: {{ displayStoreUser() }} <br>
-      - topTracks: {{ displayStoreTopTracks() }} <br>
-      - eventSuggestions: {{ displayStoreEventSuggestions() }} <br>
+      - token: <span class="lighter">{{ displayStoreToken() }}</span> <br>
+      - user: <span class="lighter">{{ displayStoreUser() }}</span> <br>
+      - topTracks: <span class="lighter">{{ displayStoreTopTracks() }}</span> <br>
+      - eventSuggestions: <span class="lighter">{{ displayStoreEventSuggestions() }}</span> <br>
     </p>
   </div>
   <div id="nav">
@@ -45,21 +45,21 @@ export default {
     // function 
     function displayStoreToken() {
       if (getStoreToken.value.exists) {
-        return `${getStoreToken.value.value.substr(0, 30)} [...]`
+        return `${getStoreToken.value.value.substr(0, 25)} [...]`
       } else {
         return 'connect w/ spotify'
       }
     }
     function displayStoreUser() {
       if (getStoreUser.value.exists) {
-        return `${JSON.stringify(getStoreUser.value).substr(0, 30)} [...]`
+        return `${JSON.stringify(getStoreUser.value).substr(0, 25)} [...]`
       } else {
         return 'connect w/ spotify'
       }
     }
     function displayStoreTopTracks() {
       if (getStoreTopTracks.value.exists) {
-        return `${JSON.stringify(getStoreTopTracks.value.map(t => t.name)).substr(0, 30)} [...]`
+        return `${JSON.stringify(getStoreTopTracks.value.map(t => t.name)).substr(0, 25)} [...]`
       } else {
         return 'connect w/ spotify'
       }
@@ -154,7 +154,12 @@ body {
 
   .state {
     text-align: left;
-    margin-left: 50px;
+    margin-left: 20px;
+  }
+
+  .lighter {
+    font-weight: lighter;
+    color: #42b983;
   }
 }
 </style>
