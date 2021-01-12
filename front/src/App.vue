@@ -1,4 +1,13 @@
 <template>
+  <div id="store">
+    <p><b>Vuex store</b><br></p>
+    <p class="state">
+      - token: {{ displayStoreToken() }} <br>
+      - user: {{ displayStoreUser() }} <br>
+      - topTracks: {{ displayStoreTopTracks() }} <br>
+      - eventSuggestions: {{ displayStoreEventSuggestions() }} <br>
+    </p>
+  </div>
   <div id="nav">
     <router-link :to="{ name: 'Home' }">Home</router-link> 
     <span> | </span>
@@ -9,15 +18,6 @@
     <router-link v-if="getStoreEventSuggestions.exists" :to="{ name: 'Events' }">Events</router-link>
   </div>
   <router-view />
-  <div id="footer">
-    <p><b>Vuex store</b><br></p>
-    <p class="store">
-      - token: {{ displayStoreToken() }} <br>
-      - user: {{ displayStoreUser() }} <br>
-      - topTracks: {{ displayStoreTopTracks() }} <br>
-      - eventSuggestions: {{ displayStoreEventSuggestions() }} <br>
-    </p>
-  </div>
 </template>
 
 <script>
@@ -143,8 +143,8 @@ body {
   background-color: #3b8070;
 }
 
-#footer {
-  position: absolute;
+#store {
+  position: sticky;
   bottom: 0;
   width: 100%;
   background-color: white;
@@ -152,7 +152,7 @@ body {
   // border-top: 1px solid #f6f6f6;
   box-shadow: 20px 0 20px 0 rgba(0, 0, 0, 0.25);
 
-  .store {
+  .state {
     text-align: left;
     margin-left: 50px;
   }
