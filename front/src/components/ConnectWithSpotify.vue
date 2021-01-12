@@ -1,6 +1,7 @@
 <template>
-  <div class="hello">
+  <div class="home">
     <h1>{{ msg }}</h1>
+    <p>Explore your favorite artists concerts<br></p>
     <a
       :href="loginUrl"
       target="_blank"
@@ -9,10 +10,9 @@
     >
       Connect with Spotify
     </a>
-    <p>
-      Find your favorite artists next concerts,<br>
+    <!-- <p>
       <router-link to="/about">check out who we are</router-link>
-    </p>
+    </p> -->
   </div>
 </template>
 
@@ -36,23 +36,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.home {
+  height: 100%;
+}
 h3 {
   margin: 40px 0 0;
 }
 a {
   color: #42b983;
-}
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
 }
 </style>

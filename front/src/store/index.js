@@ -10,31 +10,32 @@ export default createStore({
   },
   mutations: {
     editAccessToken(state, accesToken) {
-      if (!state.accesToken.exists) {
-        state.accesToken.exists = true
-        state.accesToken.value = accesToken
-        console.log('store | editAccessToken')
+      if (state.accesToken.exists) {
+        return
       }
+      state.accesToken.value = accesToken
+      state.accesToken.exists = true
+      console.log('store | editAccessToken')
     },
     editUser(state, user) {
-        state.user.exists = true
-        state.user = {
-          ...user
-        }
-        console.log('store | editUser')
-    },
-    editTopTracks(state, topTracks) {
-      state.topTracks.exists = true
-      state.topTracks = {
-        ...topTracks
+      if (state.user.exists) {
+        return
       }
+      state.user = user
+      state.user.exists = true
       console.log('store | editUser')
     },
-    editEventSuggestions(state, eventSuggestions) {
-      state.eventSuggestions.exists = true
-      state.eventSuggestions = {
-        ...eventSuggestions,
+    editTopTracks(state, topTracks) {
+      if (state.topTracks.exists) {
+        return
       }
+      state.topTracks = topTracks
+      state.topTracks.exists = true
+      console.log('store | topTracks')
+    },
+    editEventSuggestions(state, eventSuggestions) {
+      state.eventSuggestions = eventSuggestions
+      state.eventSuggestions.exists = true
       console.log('store | editEventSuggestions')
     },
   },
