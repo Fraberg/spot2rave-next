@@ -1,16 +1,18 @@
 <template>
   <div id="store">
     <button @click="appStateDisplay = !appStateDisplay"><b>Toggle vuex state</b><br></button>
-    <p v-if="appStateDisplay" class="state">
-      - token: <span class="value">{{ displayStoreToken() }}</span> <br>
-      - user: <span class="value">{{ displayStoreUser() }}</span> <br>
-      - topTracks: <span class="value">{{ displayStoreTopTracks() }}</span> <br>
-      - eventSuggestions: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
-      <br>
-      See https://vuex.vuejs.org/api/
-      <br>
-      Contact https://www.linkedin.com/in/francis-berger-a2404094/
-    </p>
+    <span v-if="appStateDisplay" >
+      <p class="state">
+        - token: <span class="value">{{ displayStoreToken() }}</span> <br>
+        - user: <span class="value">{{ displayStoreUser() }}</span> <br>
+        - topTracks: <span class="value">{{ displayStoreTopTracks() }}</span> <br>
+        - eventSuggestions: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
+        <br>
+      </p>
+      <a class="state" href="https://vuex.vuejs.org/api/">vuex doc</a>
+      <!-- <br> -->
+      <a class="state" href="https://www.linkedin.com/in/francis-berger-a2404094/">contact me</a>
+      </span>
   </div>
   <div id="nav">
     <router-link
