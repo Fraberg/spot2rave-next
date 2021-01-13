@@ -1,11 +1,7 @@
 <template>
   <div class="home">
     <h1>{{ msg }}</h1>
-    <p>
-      1) Show me your best spotify tracks
-      <br>
-      2) Then I will who show more<br>
-    </p>
+    <p>Explore your favorite artists concerts<br></p>
     <a
       :href="loginUrl"
       target="_blank"
@@ -14,7 +10,7 @@
     >
       Connect with Spotify
     </a>
-    <p v-if="getStoreToken.exists">🤗 You already are connected 🤗</p>
+    <p v-if="getStoreToken.exists">You already are connected :)</p>
   </div>
 </template>
 

@@ -1,5 +1,7 @@
 <template>
-  <h1>{{ getStoreUser.display_name }}</h1>
+  <p class="nice">Nice to meet you,</p>
+  <h1 class="name">{{ getStoreUser.display_name }},</h1>
+  <p class="info">⬇️ Here are you top spotify tracks ⬇️</p>
   <div class="me">
     <!-- <p>props.accesstoken {{ accesstoken.substr(0, 10) }}</p> -->
     <!-- <p>store.state.accesstoken {{ getStoreToken.substr(0, 10) }}</p> -->
@@ -134,24 +136,19 @@ export default {
 
   margin: auto;
   padding: 10px;
-
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: space-around;
 }
 
 /* --------------- */
 
-// .title {
-//   width: 100%;
-//   height: auto;
-//   font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-//   display: block;
-//   font-weight: 300;
-//   font-size: 5rem;
-//   color: #35495e;
-//   letter-spacing: 1px;
-//   margin: 0px 0px 20px 0px;
+// .intro {
+  .nice, .info {
+    margin: 0px;
+    font-weight: lighter;
+    font-size: 0.7rem;
+  }
+  .name {
+    margin: 0px;
+  }
 // }
 
 .results {

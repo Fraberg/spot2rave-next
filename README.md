@@ -11,6 +11,7 @@ MEVN app to fetch spotify top tracks + display related events
     - na
 - still:
     - [ ] plug to sk
+    - [ ] implement go back/fw button on same page
 
 # project readings
 - https://developer.spotify.com/documentation/web-api/reference/artists/ 

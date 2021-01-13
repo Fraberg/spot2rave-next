@@ -1,19 +1,30 @@
 <template>
   <div id="store">
-    <p><b>Vuex store</b><br></p>
-    <p class="state">
-      - token: <span class="lighter">{{ displayStoreToken() }}</span> <br>
-      - user: <span class="lighter">{{ displayStoreUser() }}</span> <br>
-      - topTracks: <span class="lighter">{{ displayStoreTopTracks() }}</span> <br>
-      - eventSuggestions: <span class="lighter">{{ displayStoreEventSuggestions() }}</span> <br>
+    <button @click="appStateDisplay = !appStateDisplay"><b>Toggle vuex state</b><br></button>
+    <p v-if="appStateDisplay" class="state">
+      - token: <span class="value">{{ displayStoreToken() }}</span> <br>
+      - user: <span class="value">{{ displayStoreUser() }}</span> <br>
+      - topTracks: <span class="value">{{ displayStoreTopTracks() }}</span> <br>
+      - eventSuggestions: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
+      <br>
+      See https://vuex.vuejs.org/api/
     </p>
   </div>
   <div id="nav">
-    <router-link :to="{ name: 'Home' }">Home</router-link> 
+    <router-link
+      :to="{ name: 'Home' }"
+    >
+      🏠      Home
+    </router-link> 
     <!-- <span> | </span>
     <router-link :to="{ name: 'About' }">About</router-link>  -->
     <span v-if="getStoreToken.exists"> | </span>
-    <router-link v-if="getStoreToken.exists" :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }">Me</router-link>
+    <router-link 
+      v-if="getStoreToken.exists"
+      :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }"
+    >
+      My top spotify tracks      🕺
+    </router-link>
     <span v-if="getStoreEventSuggestions.exists"> | </span>
     <router-link v-if="getStoreEventSuggestions.exists" :to="{ name: 'Events' }">Events</router-link>
   </div>
@@ -22,11 +33,12 @@
 
 <script>
 import { useStore } from 'vuex'
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 
 export default {
   setup(props) {
     const store = useStore()
+    const appStateDisplay = ref(false)
 
     // computed
     const getStoreToken = computed(function() {
@@ -73,6 +85,7 @@ export default {
     }
     return {
       store,
+      appStateDisplay,
 
       getStoreToken,
       getStoreUser,
@@ -103,14 +116,19 @@ body {
   padding: 0px;
 }
 
+.allButFooter {
+    height: calc(100vh - 400px);
+}
+
 #nav {
   padding: 30px;
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #57616b;
     &.router-link-exact-active {
       color: #42b983;
     }
+    text-decoration: none;
   }
 }
 
@@ -147,11 +165,17 @@ body {
   position: sticky;
   bottom: 0;
   width: 100%;
-  background-color: white;
   padding: 10px 0px;
   // border-top: 1px solid #f6f6f6;
-  box-shadow: 20px 0 20px 0 rgba(0, 0, 0, 0.25);
+  background-color: white;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
 
+  button {
+    // padding: 0.5rem 1.75rem 0.50rem 1.75rem;
+    background: white;
+    border: none;
+    font-weight: bold;
+  }
   .state {
     text-align: left;
     margin-left: 20px;
@@ -159,7 +183,7 @@ body {
     color: #42b983;
   }
 
-  .lighter {
+  .value {
     font-weight: lighter;
     font-style: italic;
     color: #2c3e50;
