@@ -1,6 +1,6 @@
 <template>
   <div id="store">
-    <button @click="appStateDisplay = !appStateDisplay"><b>Toggle vuex state</b><br></button>
+    <button @click="appStateDisplay = !appStateDisplay"><b>Toggle vuex state (for ppl who 👨‍💻)</b><br></button>
     <span v-if="appStateDisplay" >
       <p class="state">
         - token: <span class="value">{{ displayStoreToken() }}</span> <br>
