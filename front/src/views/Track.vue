@@ -16,6 +16,9 @@
     >
         Go back
     </router-link>
+    <br>
+    <br>
+    <br>
   </div>
 </template>
 
