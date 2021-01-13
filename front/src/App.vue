@@ -27,7 +27,14 @@
       v-if="getStoreToken.exists"
       :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }"
     >
-      My top spotify tracks      🕺
+      🕺 My top spotify tracks      
+    </router-link>
+    <span v-if="getStoreToken.exists"> | 🍇 </span>
+    <router-link 
+      v-if="getStoreToken.exists"
+      :to="{ name: 'More' }"
+    >
+      More
     </router-link>
     <span v-if="getStoreEventSuggestions.exists"> | </span>
     <router-link v-if="getStoreEventSuggestions.exists" :to="{ name: 'Events' }">Events</router-link>

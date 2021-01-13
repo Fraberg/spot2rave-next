@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Me from '@/views/Me.vue'
 import Track from '@/views/Track.vue'
+import More from '@/views/More.vue'
 import Events from '@/views/Events.vue'
 
 const routes = [
@@ -15,6 +16,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/more',
+    name: 'More',
+    component: More
   },
   {
     path: '/me/:accesstoken',
