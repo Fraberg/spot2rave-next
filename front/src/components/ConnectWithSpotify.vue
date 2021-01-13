@@ -4,9 +4,11 @@
     <p>
       1) Show me your best spotify tracks
       <br>
-      2) Then I will who show more<br>
+      2) Then I will show you more<br>
     </p>
+    <p v-if="getStoreToken.exists">🤗 You already are connected 🤗</p>
     <a
+      v-else
       :href="loginUrl"
       target="_blank"
       rel="noopener noreferrer"
@@ -14,7 +16,6 @@
     >
       Connect with Spotify
     </a>
-    <p v-if="getStoreToken.exists">🤗 You already are connected 🤗</p>
   </div>
 </template>
 

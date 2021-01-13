@@ -1,7 +1,7 @@
 <template>
   <p class="nice">Nice to meet you,</p>
   <h1 class="name">{{ getStoreUser.display_name }},</h1>
-  <p class="info">⬇️ Here are you top spotify tracks ⬇️</p>
+  <p class="info">⬇️ Here are you top {{ getStoreTopTracks.length }} spotify tracks over last 4 weeks ⬇️</p>
   <div class="me">
     <!-- <p>props.accesstoken {{ accesstoken.substr(0, 10) }}</p> -->
     <!-- <p>store.state.accesstoken {{ getStoreToken.substr(0, 10) }}</p> -->
