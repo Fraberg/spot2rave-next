@@ -8,6 +8,8 @@
       - eventSuggestions: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
       <br>
       See https://vuex.vuejs.org/api/
+      <br>
+      Contact https://www.linkedin.com/in/francis-berger-a2404094/
     </p>
   </div>
   <div id="nav">
