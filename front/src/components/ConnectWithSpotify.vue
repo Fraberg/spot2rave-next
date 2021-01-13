@@ -10,7 +10,7 @@
     >
       Connect with Spotify
     </a>
-    <p v-if="getStoreToken.exists">You already connected :)</p>
+    <p v-if="getStoreToken.exists">You already are connected :)</p>
   </div>
 </template>
 

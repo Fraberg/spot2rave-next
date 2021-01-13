@@ -132,12 +132,12 @@ export default {
   max-width: 600px;
   height: 100%;
 
-  margin: 0;
+  margin: auto;
   padding: 10px;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-around;
 }
 
 /* --------------- */
@@ -188,12 +188,12 @@ export default {
     }
     .name-artists-pop {
       flex: 1;
-      height: 100%;
+      height: 100px;
       text-align: left;
-      // display: flex;
-      // flex-direction: column;
-      // justify-content: space-between;
-      // align-items: baseline;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: baseline;
 
       .artists {
         font-size: 1rem;

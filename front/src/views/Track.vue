@@ -81,7 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 .track {
-  margin: 0;
+  margin: auto;
   min-width: 300px;
   width: auto;
   max-width: 600px;
@@ -89,8 +89,8 @@ export default {
 
   padding: 10px;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-around;
 }
 </style>
