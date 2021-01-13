@@ -27,7 +27,7 @@
       v-if="getStoreToken.exists"
       :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }"
     >
-      🕺 My top spotify tracks      
+      🕺 Me     
     </router-link>
     <span v-if="getStoreToken.exists"> | 🍇 </span>
     <router-link 
