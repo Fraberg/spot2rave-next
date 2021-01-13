@@ -10,13 +10,14 @@
     >
       Connect with Spotify
     </a>
-    <!-- <p>
-      <router-link to="/about">check out who we are</router-link>
-    </p> -->
+    <p v-if="getStoreToken.exists">You already connected :)</p>
   </div>
 </template>
 
 <script>
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
   name: 'ConnectWithSpotify',
   props: {
@@ -28,8 +29,17 @@ export default {
       : 'https://spot2rave.herokuapp.com/' // process.env.VUE_APP_API_BASE_URL
     const loginUrl = `${baseUrl}api/spotify/login`
     console.log('loginUrl', loginUrl, '| process.env.NODE_ENV', process.env.NODE_ENV)
-    // console.log('loginUrl:', loginUrl)
-    return { loginUrl }
+    const store = useStore()
+
+    /* ------- computed */
+    const getStoreToken = computed(function() {
+      return store.state.accesToken
+    })
+    return { 
+      loginUrl,
+      store,
+      getStoreToken
+    }
   }
 }
 </script>

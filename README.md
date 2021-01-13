@@ -19,3 +19,7 @@ MEVN app to fetch spotify top tracks + display related events
 - https://github.com/vuejs/vuex/tree/4.0/examples/composition
 - https://github.com/vuejs/vue-cli/issues/4557
 - https://stackoverflow.com/questions/600079/how-do-i-clone-a-subdirectory-only-of-a-git-repository
+- https://stackoverflow.com/questions/64867504/vue-3-the-template-root-requires-exactly-one-element-eslint-plugin-vue
+- https://www.vuemastery.com/courses/touring-vue-router/programmatic-navigation
+- https://stackoverflow.com/questions/4411306/transition-of-background-color
+- https://medium.com/js-dojo/how-to-permanently-save-data-with-vuex-localstorage-in-your-vue-app-f1d5c140db69

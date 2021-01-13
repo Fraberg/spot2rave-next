@@ -1,26 +1,32 @@
 <template>
+  <h1>{{ getStoreUser.display_name }}</h1>
   <div class="me">
-    <h1>{{ getStoreUser.display_name }}</h1>
     <!-- <p>props.accesstoken {{ accesstoken.substr(0, 10) }}</p> -->
     <!-- <p>store.state.accesstoken {{ getStoreToken.substr(0, 10) }}</p> -->
     <span v-if="isLoading">Loading</span>
     <div v-else class="results">
         <div
         v-for="(track, index) in getStoreTopTracks"
-        :key="track.index"
+        :key="track.id"
         class="track "
         :item="track"
         :index="index"
+        @click="goToTrack(track.id)"
         >
-        <!-- <p>{{ track.id }}</p> -->
         <p class=" index">{{ index + 1 }}</p>
-        <img class=" image" :src="track.image" />
+        <img class="image" :src="track.image_low" />
         <div class="name-artists-pop">
           <p class="artists">{{ track.artists.join(', ') }}</p>
           <p class="name">{{ track.name }}</p>
           <p class=" popularity">Popularité sur Spotify: {{ track.popularity }}/100</p>
         </div>
-        </div>
+        <!-- <router-link
+          class="trackvue"
+          :to="{ name: 'Track', params: { id: track.id } }"
+        >
+          1 event
+        </router-link> -->
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +43,7 @@ export default {
     const isLoading = ref(true)
     const topTracks = ref([])
     const store = useStore()
+    const router = useRouter()
 
     /* ------- vue hooks */
     onBeforeMount(async () => {
@@ -92,6 +99,10 @@ export default {
     function setTopTracksInStore(topTracks) {
       store.dispatch('setTopTrackInStore', topTracks)
     }
+    // router
+    function goToTrack(id) {
+      router.push(`/me/track/${id}`)
+    }
     return {
       isLoading,
       topTracks,
@@ -107,6 +118,8 @@ export default {
       setTokenInStore,
       setUserInStore,
       setTopTracksInStore,
+
+      goToTrack,
     }
   },
 }
@@ -114,12 +127,12 @@ export default {
 
 <style lang="scss" scoped>
 .me {
-  margin: 0;
   min-width: 300px;
   width: auto;
   max-width: 600px;
   height: 100%;
 
+  margin: 0;
   padding: 10px;
 
   display: flex;
@@ -164,17 +177,17 @@ export default {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
 
     .index {
-      width: 0 0 auto;
+      flex: 0 0 40px;
       min-width: 30px;
     }
     .image {
-      width: 0 0 auto;
+      flex: 0 0 auto;
       min-width: 100px;
-      margin-right: 10px;
+      margin-right: 15px;
       border-radius: 4px;
     }
     .name-artists-pop {
-      width: 0 0 1;
+      flex: 1;
       height: 100%;
       text-align: left;
       // display: flex;
@@ -195,6 +208,16 @@ export default {
         font-weight: lighter;
       }
     }
+    .trackvue {
+      padding: 10px;
+      flex: 0 0 60px;
+    }
+    transition-delay: 10ms;
+    transition: background-color 200ms linear;
+  }
+  .track:hover {
+    background-color: #42b983;
+    color: white;
   }
 }
 

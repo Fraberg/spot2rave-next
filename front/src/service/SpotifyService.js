@@ -82,7 +82,9 @@ class SpotifyService {
           release_date: item.release_date,
           popularity: item.popularity,
           // image: item.album.images[1].url,
-          image: item.album.images[item.album.images.length - 1].url,
+          image_high: item.album.images[0].url,
+          image_med: item.album.images[1].url,
+          image_low: item.album.images[2].url,
         }))
       )
     })
