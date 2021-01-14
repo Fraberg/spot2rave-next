@@ -8,10 +8,16 @@ MEVN app to fetch spotify top tracks + display related events
     - [x] deploy https://spot2rave.herokuapp.com/
     - [x] basic ui design
 - ongoing:
-    - na
+    - [ ] plug to tm
 - still:
     - [ ] plug to sk
     - [ ] implement go back/fw button on same page
+- to read
+    - [ ] https://bezkoder.com/vue-node-express-mongodb-mevn-crud/
+    - [ ] https://developer.ticketmaster.com/products-and-docs/apis/getting-started/
+    - [ ] https://developers.google.com/youtube/v3/guides/auth/client-side-web-apps
+    - [ ] https://github.com/youtube/api-samples
+    
 
 # project readings
 - https://developer.spotify.com/documentation/web-api/reference/artists/ 
@@ -24,3 +30,4 @@ MEVN app to fetch spotify top tracks + display related events
 - https://www.vuemastery.com/courses/touring-vue-router/programmatic-navigation
 - https://stackoverflow.com/questions/4411306/transition-of-background-color
 - https://medium.com/js-dojo/how-to-permanently-save-data-with-vuex-localstorage-in-your-vue-app-f1d5c140db69
+- https://developer.ticketmaster.com/products-and-docs/tutorials/events-search/search_events_with_discovery_api.html

@@ -79,15 +79,15 @@ export default {
     // fetch
     async function fetchTopTracks(token) {
       // console.log('fetchTopTracks | token:', token)
-      const data = await SpotifyService.getTopTrack(token)
-      // const data = await SpotifyService.getMockTopTrack()
+      // const data = await SpotifyService.getTopTrack(token)
+      const data = await SpotifyService.getMockTopTrack()
       // console.log('data:', JSON.stringify(data))
       return data
     }
     async function fetchUser(token) {
       // console.log('fetchTopTracks | token:', token)
-      const data = await SpotifyService.getUser(token)
-      // const data = await SpotifyService.getMockUser()
+      // const data = await SpotifyService.getUser(token)
+      const data = await SpotifyService.getMockUser()
       // console.log('data:', JSON.stringify(data))
       return data
     }

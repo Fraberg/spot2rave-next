@@ -11,6 +11,8 @@ app.use(cors());
 
 const spotify = require('./routes/api/spotify');
 app.use('/api/spotify', spotify);
+const ticketmaster = require('./routes/api/ticketmaster');
+app.use('/api/ticketmaster', ticketmaster);
 
 // Production
 if (process.env.NODE_ENV === 'production') {

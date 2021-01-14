@@ -16,7 +16,7 @@ module.exports = {
     rules: {
       'no-console': 'off',
       'semi': ['error', 'never'],
-      'quotes': ['error', 'single'],
+      // 'quotes': ['error', 'single'],
     },
   }
   

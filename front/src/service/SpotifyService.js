@@ -1,5 +1,6 @@
 import axios from 'axios'
-const mockData = require('./mockData')
+const mockTopTracks = require('./mockTopTracks')
+const mockUser = require('./mockUser')
 
 const topTracksEndpoint = 'https://api.spotify.com/v1/me/top/tracks'
 const UserEndpoint = 'https://api.spotify.com/v1/me'
@@ -34,7 +35,7 @@ class SpotifyService {
     console.log('SpotifyService | getMockUser')
     // console.log('topTracksEndpoint:', topTracksEndpoint)
     return new Promise((resolve, reject) => {
-      resolve(mockData.user.data)
+      resolve(mockUser.user.data)
     })
   }
 
@@ -77,7 +78,7 @@ class SpotifyService {
     console.log('SpotifyService | getMockTopTrack')
     return new Promise((resolve, reject) => {
       resolve(
-        mockData.topTracks.items.map((item) => ({
+        mockTopTracks.topTracks.items.map((item) => ({
           id: item.id,
           name: item.name,
           artists: item.artists.map((artist) => artist.name),

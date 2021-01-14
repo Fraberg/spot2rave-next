@@ -6,7 +6,7 @@
         - token: <span class="value">{{ displayStoreToken() }}</span> <br>
         - user: <span class="value">{{ displayStoreUser() }}</span> <br>
         - topTracks: <span class="value">{{ displayStoreTopTracks() }}</span> <br>
-        - eventSuggestions: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
+        - events: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
         <br>
       </p>
       <a class="state" href="https://vuex.vuejs.org/api/">vuex doc</a>
@@ -29,6 +29,10 @@
     >
       🕺 Me     
     </router-link>
+    <!-- <span v-if="getStoreToken.exists"> | </span> -->
+    <span > | 📅 </span>
+    <!-- <router-link v-if="getStoreToken.exists" :to="{ name: 'Events' }">Events</router-link> -->
+    <router-link :to="{ name: 'Events' }">Events</router-link>
     <span v-if="getStoreToken.exists"> | 🍇 </span>
     <router-link 
       v-if="getStoreToken.exists"
@@ -36,8 +40,6 @@
     >
       More
     </router-link>
-    <span v-if="getStoreEventSuggestions.exists"> | </span>
-    <router-link v-if="getStoreEventSuggestions.exists" :to="{ name: 'Events' }">Events</router-link>
   </div>
   <router-view />
 </template>
@@ -61,8 +63,8 @@ export default {
     const getStoreTopTracks = computed(function() {
         return store.state.topTracks
     })
-    const getStoreEventSuggestions = computed(function() {
-        return store.state.eventSuggestions
+    const getStoreEvents = computed(function() {
+        return store.state.events
     })
     
     // function 
@@ -88,8 +90,8 @@ export default {
       }
     }
     function displayStoreEventSuggestions() {
-      if (getStoreEventSuggestions.value.exists) {
-        return getStoreEventSuggestions.value
+      if (getStoreEvents.value.exists) {
+        return `${JSON.stringify(getStoreEvents.value).substr(0, 25)} [...]`
       } else {
         return 'feature not implemented'
       }
@@ -101,7 +103,7 @@ export default {
       getStoreToken,
       getStoreUser,
       getStoreTopTracks,
-      getStoreEventSuggestions,
+      getStoreEvents,
 
       displayStoreToken,
       displayStoreUser,
