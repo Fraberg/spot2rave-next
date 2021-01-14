@@ -1,6 +1,8 @@
 <template>
   <div id="store" @click="appStateDisplay = !appStateDisplay">
-    <p><b>toogle vuex state, for ppl who 👨‍💻</b></p>
+    <p><b>toggle vuex state, for ppl who 👨‍💻</b></p>
+    <br>
+    <br>
     <span v-if="appStateDisplay">
       <p class="state">
         - sp token: <span class="value">{{ displayStoreToken() }}</span> <br>
