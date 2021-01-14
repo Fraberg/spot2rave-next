@@ -1,7 +1,7 @@
 <template>
-  <div id="store">
-    <button @click="appStateDisplay = !appStateDisplay"><b>Toggle vuex state (for ppl who 👨‍💻)</b><br></button>
-    <span v-if="appStateDisplay" >
+  <div id="store" @click="appStateDisplay = !appStateDisplay">
+    <p><b>toogle vuex state, for ppl who 👨‍💻</b></p>
+    <span v-if="appStateDisplay">
       <p class="state">
         - sp token: <span class="value">{{ displayStoreToken() }}</span> <br>
         - sp user: <span class="value">{{ displayStoreUser() }}</span> <br>
@@ -20,7 +20,7 @@
     <span v-if="getStoreToken.exists">
       <router-link :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }"> | 😎 Me </router-link>
       <router-link  :to="{ name: 'Events' }"> | 📅 Events </router-link>
-      <router-link :to="{ name: 'More' }"> | 🍇 More </router-link>      
+      <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>      
     </span>
   </div>
   <router-view />
@@ -177,11 +177,9 @@ body {
   background-color: white;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
 
-  button {
-    // padding: 0.5rem 1.75rem 0.50rem 1.75rem;
-    background: white;
-    border: none;
+  p {
     font-weight: bold;
+    margin: 0px;
   }
   .state {
     text-align: left;
@@ -189,7 +187,6 @@ body {
     font-size: 0.8rem;
     color: #42b983;
   }
-
   .value {
     font-weight: lighter;
     font-style: italic;

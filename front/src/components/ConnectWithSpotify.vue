@@ -6,7 +6,6 @@
       <br>
       2) Then I will show you more<br>
     </p>
-    <p >🤗 You already are connected 🤗</p>
     <iframe
       v-if="getStoreToken.exists"
       src="https://giphy.com/embed/VIoXn1ZNsTidxeG9vX"
@@ -16,6 +15,7 @@
       class="giphy-embed"
       allowFullScreen>
     </iframe>
+    <p v-if="getStoreToken.exists">🤗 You already are connected 🤗</p>
     <a
       v-else
       :href="loginUrl"

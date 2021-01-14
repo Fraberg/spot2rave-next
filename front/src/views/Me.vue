@@ -50,7 +50,7 @@
 
   <br>
   <br>
-  <button class="button--green toggleTop" @click="showTracks = !showTracks"><b>See top {{ showTracks ? 'artists 👨‍🎤' : 'tracks 🎵' }}</b><br></button>
+  <button class="button--green toggleTop" @click="showTracks = !showTracks"><b>🧐 See my top {{ showTracks ? 'artists 👨‍🎤' : 'tracks 🎵' }}</b><br></button>
 
   
 </template>
