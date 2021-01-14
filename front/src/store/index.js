@@ -6,6 +6,7 @@ export default createStore({
     accesToken: { exists: false },
     user: { exists: false },
     topTracks: { exists: false },
+    topArtists: { exists: false },
     topTracksArtistsByTM: { exists: false },
     events: { exists: false }
   },
@@ -34,12 +35,26 @@ export default createStore({
       state.topTracks.exists = true
       console.log('store | topTracks')
     },
+    editTopArtists(state, topArtists) {
+      if (state.topArtists.exists) {
+        return
+      }
+      state.topArtists = topArtists
+      state.topArtists.exists = true
+      console.log('store | topArtists')
+    },
     editTopTracksArtistsByTM(state, topTracksArtistsByTM) {
+      if (state.topTracksArtistsByTM.exists) {
+        return
+      }
       state.topTracksArtistsByTM = topTracksArtistsByTM
       state.topTracksArtistsByTM.exists = true
       console.log('store | editTopTracksArtistsByTM')
     },
     editEvents(state, events) {
+      if (state.events.exists) {
+        return
+      }
       state.events = events
       state.events.exists = true
       console.log('store | editEvents')
@@ -52,8 +67,11 @@ export default createStore({
     setUserInStore ({ commit }, user) {
       commit('editUser', user)
     },
-    setTopTrackInStore ({ commit }, topTracks) {
+    setTopTracksInStore ({ commit }, topTracks) {
       commit('editTopTracks', topTracks)
+    },
+    setTopArtistsInStore ({ commit }, topArtists) {
+      commit('editTopArtists', topArtists)
     },
     setTopTracksArtistsByTM ({ commit }, events) {
       commit('editTopTracksArtistsByTM', events)

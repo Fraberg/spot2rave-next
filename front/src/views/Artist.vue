@@ -1,21 +1,17 @@
 <template>
-  <h1>{{ track.name }}</h1>
-  <div class="track">
+  <h1>{{ artist.name }}</h1>
+  <div class="artist-show">
     <span v-if="isLoading">Loading</span>
-    <div v-else class="results">
-        <!-- <p>props.id {{ track }}</p> -->
-        <img class="image" :src="track.image_med" />
-        <div class="name-artists-pop">
-          <p class="artists">{{ track.artists.join(', ') }}</p>
-          <p class="name">{{ track.name }}</p>
-          <p class=" popularity">Popularité actuelle sur Spotify: {{ track.popularity }}/100</p>
+    <div v-else class="artist-card">
+        <!-- <p>props.id {{ artist }}</p> -->
+        <img class="image" :src="artist.image_med" />
+        <div class="genres-pop">
+          <p class="genres">{{ artist.genres.join(', ') }}</p>
+          <p class="followers">Followers: {{ artist.followers.total }}</p>
+          <p class="popularity">Popularité actuelle sur Spotify: {{ artist.popularity }}/100</p>
         </div>
     </div>
-    <router-link
-        :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }"
-    >
-        Go back
-    </router-link>
+    <router-link :to="{ name: 'Events' }">Go back</router-link>
     <br>
     <br>
     <br>
@@ -32,7 +28,7 @@ export default {
   props: ['id'],
   setup(props) {
     const isLoading = ref(true)
-    const track = ref({})
+    const artist = ref({})
     const router = useRouter()
     const store = useStore()
 
@@ -40,8 +36,8 @@ export default {
     onBeforeMount(async () => {
       //   console.log('onBeforeMount')
       //   console.log('props:', props)
-      if (getStoreTracks.value.exists) {
-        track.value = getTrack(props.id)
+      if (getStoreArtists.value.exists) {
+        artist.value = getArtist(props.id)
         isLoading.value = false
       } else {
         console.log('store has been reset, back to /')
@@ -53,13 +49,13 @@ export default {
   const getStoreToken = computed(function() {
       return store.state.accesToken
     })
-    const getStoreTracks = computed(function() {
-      return store.state.topTracks
+    const getStoreArtists = computed(function() {
+      return store.state.topArtists
     })
 
     /* ------- functions */
-    function getTrack(id) {
-      return getStoreTracks.value.find(t => t.id === props.id)
+    function getArtist(id) {
+      return getStoreArtists.value.find(t => t.id === props.id)
     }
     
     // router
@@ -69,12 +65,12 @@ export default {
 
     return {
         isLoading,
-        track,
+        artist,
         router,
         store,
 
         getStoreToken,
-        getStoreTracks,
+        getStoreArtists,
 
         goBack,
     }
@@ -83,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.track {
+.artist-show {
   margin: auto;
   min-width: 300px;
   width: auto;
@@ -92,8 +88,22 @@ export default {
 
   padding: 10px;
 
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+p {
+    margin: 0px;
+}
+.artist-card {
+    width: 100%;
+    // display: flex;
+    // justify-content: left;
+    // align-items: center;
+    // vertical-align: middle;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
 }
 </style>

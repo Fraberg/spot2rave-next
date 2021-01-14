@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Me from '@/views/Me.vue'
 import Track from '@/views/Track.vue'
+import Artist from '@/views/Artist.vue'
 import More from '@/views/More.vue'
 import Events from '@/views/Events.vue'
 
@@ -33,6 +34,12 @@ const routes = [
     name: 'Track',
     props: true,
     component: Track
+  },
+  {
+    path: '/me/artist/:id/',
+    name: 'Artist',
+    props: true,
+    component: Artist
   },
   {
     path: '/events',

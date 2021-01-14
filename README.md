@@ -9,6 +9,7 @@ MEVN app to fetch spotify top tracks + display related events
     - [x] basic ui design
 - ongoing:
     - [ ] plug to tm
+    - [ ] modularizing https://www.vuemastery.com/courses/vue-3-essentials/modularizing
 - still:
     - [ ] plug to sk
     - [ ] implement go back/fw button on same page

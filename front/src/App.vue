@@ -3,10 +3,11 @@
     <button @click="appStateDisplay = !appStateDisplay"><b>Toggle vuex state (for ppl who 👨‍💻)</b><br></button>
     <span v-if="appStateDisplay" >
       <p class="state">
-        - token: <span class="value">{{ displayStoreToken() }}</span> <br>
-        - user: <span class="value">{{ displayStoreUser() }}</span> <br>
-        - topTracks: <span class="value">{{ displayStoreTopTracks() }}</span> <br>
-        - events: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
+        - sp token: <span class="value">{{ displayStoreToken() }}</span> <br>
+        - sp user: <span class="value">{{ displayStoreUser() }}</span> <br>
+        - sp topTracks: <span class="value">{{ displayStoreTopTracks() }}</span> <br>
+        - sp topArtists: <span class="value">{{ displayStoreTopArtists() }}</span> <br>
+        - tm events: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
         <br>
       </p>
       <a class="state" href="https://vuex.vuejs.org/api/">vuex doc</a>
@@ -15,31 +16,12 @@
       </span>
   </div>
   <div id="nav">
-    <router-link
-      :to="{ name: 'Home' }"
-    >
-      🏠      Home
-    </router-link> 
-    <!-- <span> | </span>
-    <router-link :to="{ name: 'About' }">About</router-link>  -->
-    <span v-if="getStoreToken.exists"> | </span>
-    <router-link 
-      v-if="getStoreToken.exists"
-      :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }"
-    >
-      🕺 Me     
-    </router-link>
-    <!-- <span v-if="getStoreToken.exists"> | </span> -->
-    <span > | 📅 </span>
-    <!-- <router-link v-if="getStoreToken.exists" :to="{ name: 'Events' }">Events</router-link> -->
-    <router-link :to="{ name: 'Events' }">Events</router-link>
-    <span v-if="getStoreToken.exists"> | 🍇 </span>
-    <router-link 
-      v-if="getStoreToken.exists"
-      :to="{ name: 'More' }"
-    >
-      More
-    </router-link>
+    <router-link :to="{ name: 'Home' }"> 🏠 Home </router-link> 
+    <span v-if="getStoreToken.exists">
+      <router-link :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }"> | 😎 Me </router-link>
+      <router-link  :to="{ name: 'Events' }"> | 📅 Events </router-link>
+      <router-link :to="{ name: 'More' }"> | 🍇 More </router-link>      
+    </span>
   </div>
   <router-view />
 </template>
@@ -62,6 +44,9 @@ export default {
     })
     const getStoreTopTracks = computed(function() {
         return store.state.topTracks
+    })
+    const getStoreTopArtists = computed(function() {
+      return store.state.topArtists
     })
     const getStoreEvents = computed(function() {
         return store.state.events
@@ -89,6 +74,13 @@ export default {
         return 'connect w/ spotify'
       }
     }
+    function displayStoreTopArtists() {
+      if (getStoreTopArtists.value.exists) {
+        return `${JSON.stringify(getStoreTopArtists.value.map(a => a.name)).substr(0, 25)} [...]`
+      } else {
+        return 'connect w/ spotify'
+      }
+    }
     function displayStoreEventSuggestions() {
       if (getStoreEvents.value.exists) {
         return `${JSON.stringify(getStoreEvents.value).substr(0, 25)} [...]`
@@ -108,6 +100,7 @@ export default {
       displayStoreToken,
       displayStoreUser,
       displayStoreTopTracks,
+      displayStoreTopArtists,
       displayStoreEventSuggestions,
     }
   }
@@ -161,6 +154,7 @@ body {
 }
 
 .button--green {
+  background: white;
   display: inline-block;
   border-radius: 40px;
   border: 1px solid #3b8070;

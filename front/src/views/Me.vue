@@ -1,40 +1,63 @@
 <template>
   <p class="nice">Nice to meet you,</p>
   <h1 class="name">{{ getStoreUser.display_name }},</h1>
-  <p class="info">⬇️ Here are you top {{ getStoreTopTracks.length }} spotify tracks over last 4 weeks ⬇️</p>
-  <div class="me">
-    <!-- <p>props.accesstoken {{ accesstoken.substr(0, 10) }}</p> -->
-    <!-- <p>store.state.accesstoken {{ getStoreToken.substr(0, 10) }}</p> -->
+
+  <p class="info">⬇️ Here is you top {{ showTracks ? getStoreTopTracks.length : getStoreTopArtists.length }} spotify {{ showTracks ? 'tracks 🎵' : 'artists 👨‍🎤' }} ️⬇️</p>
+  
+  <div v-if="showTracks" class="me">
     <span v-if="isLoading">Loading</span>
     <div v-else class="results">
         <div
         v-for="(track, index) in getStoreTopTracks"
         :key="track.id"
-        class="track "
+        class="card"
         :item="track"
         :index="index"
         @click="goToTrack(track.id)"
         >
-        <p class=" index">{{ index + 1 }}</p>
+        <p class="index">{{ index + 1 }}</p>
         <img class="image" :src="track.image_low" />
         <div class="name-artists-pop">
           <p class="artists">{{ track.artists.join(', ') }}</p>
           <p class="name">{{ track.name }}</p>
-          <p class=" popularity">Popularité sur Spotify: {{ track.popularity }}/100</p>
+          <p class="popularity">Popularité actuelle sur Spotify: {{ track.popularity }}/100</p>
         </div>
-        <!-- <router-link
-          class="trackvue"
-          :to="{ name: 'Track', params: { id: track.id } }"
-        >
-          1 event
-        </router-link> -->
       </div>
     </div>
   </div>
+
+  <div v-if="!showTracks" class="me">
+    <span v-if="isLoading">Loading</span>
+    <div v-else class="results">
+        <div
+        v-for="(artist, index) in getStoreTopArtists"
+        :key="artist.id"
+        class="card"
+        :item="artist"
+        :index="index"
+        @click="goToArtist(artist.id)"
+      >
+        <p class="index">{{ index + 1 }}</p>
+        <img class="image" :src="artist.image_low" />
+        <div class="name-artists-pop">
+          <p class="name">{{ artist.name }}</p>
+          <!-- <p class="artists">{{ artist.artists.join(', ') }}</p> -->
+          <p class="popularity">Popularité sur Spotify: {{ artist.popularity }}/100</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <button class="button--green toggleTop" @click="showTracks = !showTracks"><b>See top {{ showTracks ? 'artists 👨‍🎤' : 'tracks 🎵' }}</b><br></button>
+
+  
 </template>
 
 <script>
 import { ref, onBeforeMount, computed } from 'vue'
+import useStoreHelper from '@/use/useStoreHelper'
 import SpotifyService from '@/service/SpotifyService'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
@@ -43,21 +66,42 @@ export default {
   props: ['accesstoken'],
   setup(props) {
     const isLoading = ref(true)
+    const showTracks = ref(false)
     const topTracks = ref([])
-    const store = useStore()
+    const topArtists = ref([])
     const router = useRouter()
+    const { 
+      store,
+      
+      getStoreToken,
+      getStoreUser,
+      getStoreTopTracks,
+      getStoreTopArtists,
+      getStoreTopTracksArtistsByTM,
+      getStoreEvents,
+
+      setTokenInStore,
+      setUserInStore,
+      setTopTracksInStore,
+      setTopArtistsInStore,
+      setTopTracksArtistsByTM,
+      setEventsInStore,
+    } = useStoreHelper()
 
     /* ------- vue hooks */
     onBeforeMount(async () => {
       // console.log('onBeforeMount')
       if (props.accesstoken && !store.state.accesToken.exists) {
         setTokenInStore(props.accesstoken)
-        // Top Tracks
-        topTracks.value = await fetchTopTracks(props.accesstoken)
-        setTopTracksInStore(topTracks.value)
         // User
         const user = await fetchUser(props.accesstoken)
         setUserInStore(user)
+        // Top Tracks
+        topTracks.value = await fetchTopTracks(props.accesstoken)
+        setTopTracksInStore(topTracks.value)
+        // Top Artists
+        topArtists.value = await fetchTopArtists(props.accesstoken)
+        setTopArtistsInStore(topArtists.value)
       } else {
         console.log('nothing to update')
       }
@@ -65,61 +109,63 @@ export default {
     })
     
     /* ------- computed */
-    const getStoreToken = computed(function() {
-      return store.state.accesToken
-    })
-    const getStoreTopTracks = computed(function() {
-      return store.state.topTracks
-    })
-    const getStoreUser = computed(function() {
-      return store.state.user
-    })
+    // see useStoreHelpers.js
 
     /* ------- functions */
     // fetch
-    async function fetchTopTracks(token) {
-      // console.log('fetchTopTracks | token:', token)
-      // const data = await SpotifyService.getTopTrack(token)
-      const data = await SpotifyService.getMockTopTrack()
-      // console.log('data:', JSON.stringify(data))
-      return data
-    }
     async function fetchUser(token) {
       // console.log('fetchTopTracks | token:', token)
-      // const data = await SpotifyService.getUser(token)
-      const data = await SpotifyService.getMockUser()
-      // console.log('data:', JSON.stringify(data))
+      const data = process.env.NODE_ENV === 'development'
+      ? await SpotifyService.getMockUser()
+      : await SpotifyService.getUser(token)
       return data
     }
-    // setters
-    function setTokenInStore(token) {
-      store.dispatch('setAccessToken', token)
+    async function fetchTopTracks(token) {
+      // console.log('fetchTopTracks | token:', token)
+      const data = process.env.NODE_ENV === 'development'
+      ? await SpotifyService.getMockTopTracks()
+      : await SpotifyService.getTopTrack(token)
+      return data
     }
-    function setUserInStore(user) {
-      store.dispatch('setUserInStore', user)
+    async function fetchTopArtists(token) {
+      // console.log('fetchTopTracks | token:', token)
+      const data = process.env.NODE_ENV === 'development'
+      ? await SpotifyService.getMockTopArtists()
+      : await SpotifyService.getTopArtists(token)
+      return data
     }
-    function setTopTracksInStore(topTracks) {
-      store.dispatch('setTopTrackInStore', topTracks)
-    }
+
+    /* ------- store setters */
+    // see useStoreHelpers.js
+
     // router
     function goToTrack(id) {
       router.push(`/me/track/${id}`)
     }
     return {
       isLoading,
+      showTracks,
       topTracks,
       store,
+      router,
 
       getStoreToken,
-      getStoreTopTracks,
       getStoreUser,
+      getStoreTopTracks,
+      getStoreTopArtists,
+      getStoreTopTracksArtistsByTM,
+      getStoreEvents,
 
-      fetchTopTracks,
       fetchUser,
+      fetchTopTracks,
+      fetchTopArtists,
 
       setTokenInStore,
       setUserInStore,
       setTopTracksInStore,
+      setTopArtistsInStore,
+      setTopTracksArtistsByTM,
+      setEventsInStore,
 
       goToTrack,
     }
@@ -140,16 +186,14 @@ export default {
 
 /* --------------- */
 
-// .intro {
-  .nice, .info {
-    margin: 0px;
-    font-weight: lighter;
-    font-size: 0.7rem;
-  }
-  .name {
-    margin: 0px;
-  }
-// }
+.nice, .info {
+  margin: 0px;
+  font-weight: lighter;
+  font-size: 0.7rem;
+}
+.name {
+  margin: 0px;
+}
 
 .results {
   width: 100%;
@@ -162,7 +206,7 @@ export default {
     margin: 0px;
   }
 
-  .track {
+  .card {
     width: 100%;
     display: flex;
     justify-content: left;
@@ -179,7 +223,7 @@ export default {
     }
     .image {
       flex: 0 0 auto;
-      min-width: 100px;
+      width: 100px;
       margin-right: 15px;
       border-radius: 4px;
     }
@@ -218,4 +262,8 @@ export default {
   }
 }
 
+.toggleTop {
+  position: sticky;
+  bottom: 30px;
+}
 </style>

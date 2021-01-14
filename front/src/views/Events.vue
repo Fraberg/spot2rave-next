@@ -1,62 +1,70 @@
 <template>
   <p class="nice">Just for you,</p>
   <h1 class="name">{{ getStoreUser.display_name }},</h1>
-  <p class="info">⬇️ Here are some upcoming events related to your spotify tracks ⬇️</p>
+  <p class="info">⬇️ Here are some upcoming events related to your favorite artists ⬇️</p>
   <div class="events">
     <span v-if="isLoading">Loading</span>
-    <p v-else>
-      {{ getStoreTopTracksArtistsByTM.name }}
-      <br>
-      <br>
-      {{ getStoreEvents[0].description }}
-      <br>
-      <br>
-      {{ getStoreEvents[1].description }}
-    </p>
-    <!-- <div v-else class="results">
+    <div v-else class="results">
         <div
-        v-for="(event, index) in getStoreEvents"
-        :key="event.id"
-        class="event"
-        :item="event"
+        v-for="(artist, index) in getStoreTopArtists"
+        :key="artist.id"
+        class="artist"
+        :item="artist"
         :index="index"
-        @click="goToEvent(event.id)"
+        @click="goToArtist(artist.id)"
       >
-        <p class=" index">index + 1</p>
-        <img class="image" src="https://static.ticketmaster.fr/static/images/vignettes/a_484471.gif" />
+        <p class="index">{{ index + 1 }}</p>
+        <img class="image" :src="artist.image_low" />
         <div class="name-artists-pop">
-          <p class="artists">event.artists.join(', ')</p>
-          <p class="name">event.name</p>
-          <p class=" popularity">Popularité</p>
+          <p class="name">{{ artist.name }}</p>
+          <!-- <p class="artists">{{ artist.artists.join(', ') }}</p> -->
+          <p class="popularity">Popularité sur Spotify: {{ artist.popularity }}/100</p>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
 import { ref, onBeforeMount, computed } from 'vue'
+import useStoreHelper from '@/use/useStoreHelper'
 import TicketMasterService from '@/service/TicketMasterService'
 import { useRoute, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
 
 export default {
   setup(props) {
     const isLoading = ref(true)
     const topTracksArtistsByTM = ref([])
     const events = ref([])
-    const store = useStore()
     const router = useRouter()
+    
+    const { 
+      store,
+      
+      getStoreToken,
+      getStoreUser,
+      getStoreTopTracks,
+      getStoreTopArtists,
+      getStoreTopTracksArtistsByTM,
+      getStoreEvents,
+
+      setTokenInStore,
+      setUserInStore,
+      setTopTracksInStore,
+      setTopArtistsInStore,
+      setTopTracksArtistsByTM,
+      setEventsInStore,
+    } = useStoreHelper()
 
     /* ------- vue hooks */
     onBeforeMount(async () => {
       // console.log('onBeforeMount')
       if (!store.state.events.exists) {
-        topTracksArtistsByTM.value = await fetchArtistsByTM()
-        setTopTracksArtistsByTM(topTracksArtistsByTM.value)
+        // topTracksArtistsByTM.value = await fetchArtistsByTM()
+        // setTopTracksArtistsByTM(topTracksArtistsByTM.value)
         
-        events.value = await fetchEventsByTM(topTracksArtistsByTM.value.id)
-        setEventsInStore(events.value)
+        // events.value = await fetchEventsByTM(topTracksArtistsByTM.value.id)
+        // setEventsInStore(events.value)
       } else {
         console.log('nothing to update')
       }
@@ -64,18 +72,7 @@ export default {
     })
     
     /* ------- computed */
-    const getStoreToken = computed(function() {
-      return store.state.accesToken
-    })
-      const getStoreUser = computed(function() {
-        return store.state.user
-    })
-    const getStoreTopTracksArtistsByTM = computed(function() {
-      return store.state.topTracksArtistsByTM
-    })
-    const getStoreEvents = computed(function() {
-      return store.state.events
-    })
+    // see useStoreHelpers.js
 
     /* ------- functions */
     // fetch
@@ -94,17 +91,14 @@ export default {
       return data
     }
 
-    // setters
-    function setTopTracksArtistsByTM(topTracksArtistsByTM) {
-      store.dispatch('setTopTracksArtistsByTM', topTracksArtistsByTM)
+    /* ------- store setters */
+    // see useStoreHelpers.js
+
+     /* ------- router */
+    function goToArtist(id) {
+      router.push(`/me/artist/${id}`)
     }
-    function setEventsInStore(events) {
-      store.dispatch('setEventsInStore', events)
-    }
-    // router
-    function goToEvent(id) {
-      router.push(`/me/event/${id}`)
-    }
+
     return {
       isLoading,
       events,
@@ -112,15 +106,22 @@ export default {
 
       getStoreToken,
       getStoreUser,
+      getStoreTopTracks,
+      getStoreTopArtists,
       getStoreTopTracksArtistsByTM,
       getStoreEvents,
 
       fetchArtistsByTM,
       fetchEventsByTM,
 
+      setTokenInStore,
+      setUserInStore,
+      setTopTracksInStore,
+      setTopArtistsInStore,
+      setTopTracksArtistsByTM,
       setEventsInStore,
 
-      goToEvent,
+      goToArtist,
     }
   },
 }
@@ -161,7 +162,7 @@ export default {
     margin: 0px;
   }
 
-  .event {
+  .artist {
     width: 100%;
     display: flex;
     justify-content: left;
@@ -178,7 +179,7 @@ export default {
     }
     .image {
       flex: 0 0 auto;
-      min-width: 100px;
+      width: 100px;
       margin-right: 15px;
       border-radius: 4px;
     }
