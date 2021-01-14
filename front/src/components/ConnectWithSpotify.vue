@@ -5,7 +5,9 @@
       1) Show me your best spotify tracks
       <br>
       2) Then I will show you more<br>
+      ⬇️⬇️⬇️⬇️⬇️⬇️
     </p>
+    <p v-if="getStoreToken.exists">🤗 You already are connected to Spotify 🤗</p>
     <iframe
       v-if="getStoreToken.exists"
       src="https://giphy.com/embed/VIoXn1ZNsTidxeG9vX"
@@ -15,7 +17,7 @@
       class="giphy-embed"
       allowFullScreen>
     </iframe>
-    <p v-if="getStoreToken.exists">🤗 You already are connected 🤗</p>
+    <p v-if="getStoreToken.exists">🤗 You already are connected to Spotify 🤗</p>
     <a
       v-else
       :href="loginUrl"
