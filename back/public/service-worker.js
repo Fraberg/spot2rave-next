@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.64462275f1bce73067fed07dc11fce47.js"
+  "/precache-manifest.40d49730548ad72894babef6c36b296f.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "Spot2Rave"});
+workbox.core.setCacheNameDetails({prefix: "Spotitops"});
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {

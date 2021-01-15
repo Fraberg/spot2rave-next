@@ -1,11 +1,11 @@
-# spot2rave-next
+# spotitops
 MEVN app to fetch spotify top tracks + display related events
 
 # todo
 - done:
     - [x] vue-router
     - [x] vuex
-    - [x] deploy https://spot2rave.herokuapp.com/
+    - [x] deploy https://spotitops.herokuapp.com/
     - [x] basic ui design
     - [x] [modularized composition API](https://www.vuemastery.com/courses/vue-3-essentials/modularizing)
 - ongoing:

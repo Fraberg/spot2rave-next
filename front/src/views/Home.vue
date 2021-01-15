@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <ConnectWithSpotify msg="Welcome to Spot2Rave"/>
+    <ConnectWithSpotify msg="Welcome to Spotitops"/>
   </div>
 </template>
 

@@ -7,6 +7,7 @@
   <div v-if="showTracks" class="me">
     <span v-if="isLoading">Loading</span>
     <iframe v-if="isLoading" src="https://giphy.com/embed/l3nWhI38IWDofyDrW" width="350" height="350" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    <!-- <iframe src="https://giphy.com/embed/bMdZu3fG2ZEBO" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/abcnetwork-angry-upset-bMdZu3fG2ZEBO">via GIPHY</a></p> -->
     <div v-else class="results">
         <div
         v-for="(track, index) in getStoreTopTracks"
