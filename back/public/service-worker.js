@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.5d5b8938ccd929938192a2c164e58fd2.js"
+  "/precache-manifest.55ec70bd44931e2fa729664d4482ae6b.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "Spot2Rave"});

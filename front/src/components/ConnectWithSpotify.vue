@@ -6,8 +6,6 @@
       <br>
       2️⃣ Then I will show you more ... 🍑<br>
       <br>
-      Connect<br>
-      <br>
       ⬇️⬇️⬇️
     </p>
     <iframe
@@ -27,7 +25,7 @@
       rel="noopener noreferrer"
       class="button--green"
     >
-      Connect with Spotify
+      🎵 Connect with Spotify 🎵
     </a>
     <br>
   </div>
