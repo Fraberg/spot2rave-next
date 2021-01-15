@@ -142,6 +142,10 @@ export default {
     function goToTrack(id) {
       router.push(`/me/track/${id}`)
     }
+    function goToArtist(id) {
+      router.push(`/me/artist/${id}`)
+    }
+
     return {
       isLoading,
       showTracks,
@@ -168,6 +172,7 @@ export default {
       setEventsInStore,
 
       goToTrack,
+      goToArtist,
     }
   },
 }

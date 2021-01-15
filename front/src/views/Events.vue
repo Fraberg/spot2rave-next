@@ -6,19 +6,19 @@
     <span v-if="isLoading">Loading</span>
     <div v-else class="results">
         <div
-        v-for="(artist, index) in getStoreTopArtists"
-        :key="artist.id"
-        class="artist"
-        :item="artist"
+        v-for="(event, index) in getStoreEvents"
+        :key="event.id"
+        class="event"
+        :item="event"
         :index="index"
-        @click="goToArtist(artist.id)"
+        @click="goToArtist(event.id)"
       >
         <p class="index">{{ index + 1 }}</p>
-        <img class="image" :src="artist.image_low" />
-        <div class="name-artists-pop">
-          <p class="name">{{ artist.name }}</p>
-          <!-- <p class="artists">{{ artist.artists.join(', ') }}</p> -->
-          <p class="popularity">Popularité actuelle sur Spotify: {{ artist.popularity }}/100</p>
+        <img class="image" :src="event.image_low" />
+        <div class="name-events-pop">
+          <p class="name">{{ event.name }}</p>
+          <!-- <p class="events">{{ event.events.join(', ') }}</p> -->
+          <p class="popularity">Popularité actuelle sur Spotify: {{ event.popularity }}/100</p>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@ export default {
       } else {
         console.log('nothing to update')
       }
-      isLoading.value = false
+      // isLoading.value = false
     })
     
     /* ------- computed */

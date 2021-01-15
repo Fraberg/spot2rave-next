@@ -3,7 +3,6 @@
     <p><b>toggle vuex state, for ppl who 👨‍💻</b></p>
     <span v-if="appStateDisplay">
       <br>
-      <br>
       <p class="state">
         - sp token: <span class="value">{{ displayStoreToken() }}</span> <br>
         - sp user: <span class="value">{{ displayStoreUser() }}</span> <br>
@@ -12,9 +11,9 @@
         - tm events: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
         <br>
       </p>
-      <a class="state" href="https://vuex.vuejs.org/api/">wth is vuex ?</a>
+      <a class="state" href="https://vuex.vuejs.org/api/">WTF is vuex?</a>
       <!-- <br> -->
-      <a class="state" href="https://www.linkedin.com/in/francis-berger-a2404094/">any feedback ? plzz contact me</a>
+      <a class="state" href="https://www.linkedin.com/in/francis-berger-a2404094/">any feedback? plzz tell me</a>
       </span>
   </div>
   <div id="nav">

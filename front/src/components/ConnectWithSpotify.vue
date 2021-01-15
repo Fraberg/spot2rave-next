@@ -29,6 +29,7 @@
     >
       Connect with Spotify
     </a>
+    <br>
   </div>
 </template>
 

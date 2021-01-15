@@ -11,11 +11,7 @@
           <p class=" popularity">Popularité actuelle sur Spotify: {{ track.popularity }}/100</p>
         </div>
     </div>
-    <router-link
-        :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }"
-    >
-        Go back
-    </router-link>
+    <router-link :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }">Go back</router-link>
     <br>
     <br>
     <br>
