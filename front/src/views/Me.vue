@@ -50,7 +50,7 @@
 
   <br>
   <br>
-  <button class="button--green toggleTop" @click="showTracks = !showTracks"><b>🧐 See my top {{ showTracks ? 'artists 👨‍🎤' : 'tracks 🎵' }}</b><br></button>
+  <button class="button--green toggleTop" @click="showTracks = !showTracks"><b>👉 See my top {{ showTracks ? 'artists 👨‍🎤' : 'tracks 🎵' }}</b><br></button>
 
   
 </template>
@@ -265,5 +265,6 @@ export default {
 .toggleTop {
   position: sticky;
   bottom: 30px;
+  font-size: 1rem;
 }
 </style>

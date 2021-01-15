@@ -5,19 +5,21 @@
       1) Show me your best spotify tracks
       <br>
       2) Then I will show you more<br>
+      <br>
+      Connect<br>
       ⬇️⬇️⬇️⬇️⬇️⬇️
     </p>
-    <p v-if="getStoreToken.exists">🤗 You already are connected to Spotify 🤗</p>
+    <p v-if="getStoreToken.exists">🤗 Yay! you already are connected to Spotify 🤗</p>
     <iframe
       v-if="getStoreToken.exists"
       src="https://giphy.com/embed/VIoXn1ZNsTidxeG9vX"
-      width="480"
-      height="475"
+      width="350"
+      height="350"
       frameBorder="0"
       class="giphy-embed"
       allowFullScreen>
     </iframe>
-    <p v-if="getStoreToken.exists">🤗 You already are connected to Spotify 🤗</p>
+    <p v-if="getStoreToken.exists">🤗 Yay! you already are connected to Spotify 🤗</p>
     <a
       v-else
       :href="loginUrl"
