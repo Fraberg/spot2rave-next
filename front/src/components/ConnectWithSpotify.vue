@@ -2,14 +2,14 @@
   <div class="home">
     <h1>{{ msg }}</h1>
     <p>
-      1) Show me your best spotify tracks
+      1️⃣ Show me your favorite spotify tracks
       <br>
-      2) Then I will show you more<br>
+      2️⃣ Then I will show you more ... 🍑<br>
       <br>
       Connect<br>
-      ⬇️⬇️⬇️⬇️⬇️⬇️
+      <br>
+      ⬇️⬇️⬇️
     </p>
-    <p v-if="getStoreToken.exists">🤗 Yay! you already are connected to Spotify 🤗</p>
     <iframe
       v-if="getStoreToken.exists"
       src="https://giphy.com/embed/VIoXn1ZNsTidxeG9vX"
@@ -19,7 +19,7 @@
       class="giphy-embed"
       allowFullScreen>
     </iframe>
-    <p v-if="getStoreToken.exists">🤗 Yay! you already are connected to Spotify 🤗</p>
+    <p v-if="getStoreToken.exists">Yay! you already are connected to Spotify</p>
     <a
       v-else
       :href="loginUrl"

@@ -64,19 +64,19 @@ export default createStore({
     setAccessToken ({ commit }, accesToken) {
       commit('editAccessToken', accesToken)
     },
-    setUserInStore ({ commit }, user) {
+    setStoreUser ({ commit }, user) {
       commit('editUser', user)
     },
-    setTopTracksInStore ({ commit }, topTracks) {
+    setStoreTopTracks ({ commit }, topTracks) {
       commit('editTopTracks', topTracks)
     },
-    setTopArtistsInStore ({ commit }, topArtists) {
+    setStoreTopArtists ({ commit }, topArtists) {
       commit('editTopArtists', topArtists)
     },
-    setTopTracksArtistsByTM ({ commit }, events) {
+    setStoreTopTracksArtistsByTM ({ commit }, events) {
       commit('editTopTracksArtistsByTM', events)
     },
-    setEventsInStore ({ commit }, events) {
+    setStoreEvents ({ commit }, events) {
       commit('editEvents', events)
     },
   },

@@ -2,10 +2,12 @@
   <p class="nice">Nice to meet you,</p>
   <h1 class="name">{{ getStoreUser.display_name }},</h1>
 
-  <p class="info">⬇️ Here is you top {{ showTracks ? getStoreTopTracks.length : getStoreTopArtists.length }} spotify {{ showTracks ? 'tracks 🎵' : 'artists 👨‍🎤' }} ️⬇️</p>
+  <p class="info">⬇️ Here is you <span class="green bold">top {{ showTracks ? getStoreTopTracks.length : getStoreTopArtists.length }} spotify</span> {{ showTracks ? 'tracks 🎵' : 'artists 👨‍🎤' }} ️⬇️</p>
   
   <div v-if="showTracks" class="me">
     <span v-if="isLoading">Loading</span>
+    <!-- <div v-if="isLoading" style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/l3nWhI38IWDofyDrW" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div> -->
+    <!-- <p><a href="https://giphy.com/gifs/thinking-l3nWhI38IWDofyDrW">via GIPHY</a></p> -->
     <div v-else class="results">
         <div
         v-for="(track, index) in getStoreTopTracks"
@@ -41,8 +43,8 @@
         <img class="image" :src="artist.image_low" />
         <div class="name-artists-pop">
           <p class="name">{{ artist.name }}</p>
-          <!-- <p class="artists">{{ artist.artists.join(', ') }}</p> -->
-          <p class="popularity">Popularité sur Spotify: {{ artist.popularity }}/100</p>
+          <p class="followers">{{ artist.followersNumeral }} followers</p>
+          <p class="popularity">Popularité actuelle sur Spotify: {{ artist.popularity }}/100</p>
         </div>
       </div>
     </div>
@@ -56,6 +58,8 @@
 </template>
 
 <script>
+import numeral from 'numeral'
+
 import { ref, onBeforeMount, computed } from 'vue'
 import useStoreHelper from '@/use/useStoreHelper'
 import SpotifyService from '@/service/SpotifyService'
@@ -80,28 +84,32 @@ export default {
       getStoreTopTracksArtistsByTM,
       getStoreEvents,
 
-      setTokenInStore,
-      setUserInStore,
-      setTopTracksInStore,
-      setTopArtistsInStore,
-      setTopTracksArtistsByTM,
-      setEventsInStore,
+      setStoreToken,
+      setStoreUser,
+      setStoreTopTracks,
+      setStoreTopArtists,
+      setStoreTopTracksArtistsByTM,
+      setStoreEvents,
     } = useStoreHelper()
 
     /* ------- vue hooks */
     onBeforeMount(async () => {
       // console.log('onBeforeMount')
       if (props.accesstoken && !store.state.accesToken.exists) {
-        setTokenInStore(props.accesstoken)
+        setStoreToken(props.accesstoken)
         // User
         const user = await fetchUser(props.accesstoken)
-        setUserInStore(user)
+        setStoreUser(user)
         // Top Tracks
         topTracks.value = await fetchTopTracks(props.accesstoken)
-        setTopTracksInStore(topTracks.value)
+        setStoreTopTracks(topTracks.value)
         // Top Artists
         topArtists.value = await fetchTopArtists(props.accesstoken)
-        setTopArtistsInStore(topArtists.value)
+        topArtists.value = topArtists.value.map(a => ({
+          followersNumeral: numeral(a.followers.total).format('Oa'),
+          ...a,
+        }))
+        setStoreTopArtists(topArtists.value)
       } else {
         console.log('nothing to update')
       }
@@ -164,12 +172,12 @@ export default {
       fetchTopTracks,
       fetchTopArtists,
 
-      setTokenInStore,
-      setUserInStore,
-      setTopTracksInStore,
-      setTopArtistsInStore,
-      setTopTracksArtistsByTM,
-      setEventsInStore,
+      setStoreToken,
+      setStoreUser,
+      setStoreTopTracks,
+      setStoreTopArtists,
+      setStoreTopTracksArtistsByTM,
+      setStoreEvents,
 
       goToTrack,
       goToArtist,
@@ -259,17 +267,19 @@ export default {
       flex: 0 0 60px;
     }
     transition-delay: 10ms;
-    transition: background-color 200ms linear;
+    transition: background-color 150ms linear;
   }
-  .track:hover {
+  .card:hover {
     background-color: #42b983;
     color: white;
   }
 }
 
 .toggleTop {
+  width: 260px;
   position: sticky;
   bottom: 30px;
   font-size: 1rem;
 }
+
 </style>

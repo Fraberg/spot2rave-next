@@ -1,10 +1,10 @@
 <template>
   <div id="store" @click="appStateDisplay = !appStateDisplay">
-    <p><b>toggle vuex state, for ppl who 👨‍💻</b></p>
+    <p><b>toggle vuex store, for ppl who 👨‍💻</b></p>
     <span v-if="appStateDisplay">
       <br>
       <p class="state">
-        - sp token: <span class="value">{{ displayStoreToken() }}</span> <br>
+        - sp token: 🔑 <span class="value">{{ displayStoreToken() }}</span> <br>
         - sp user: <span class="value">{{ displayStoreUser() }}</span> <br>
         - sp topTracks: <span class="value">{{ displayStoreTopTracks() }}</span> <br>
         - sp topArtists: <span class="value">{{ displayStoreTopArtists() }}</span> <br>
@@ -158,15 +158,19 @@ body {
   background: white;
   display: inline-block;
   border-radius: 40px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
+  border: 1px solid #42b983;
+  color: #42b983;
   text-decoration: none;
   padding: 10px 30px;
 }
 
 .button--green:hover {
   color: #fff;
-  background-color: #3b8070;
+  background-color: #42b983;
+}
+
+button:focus {
+  outline:0;
 }
 
 #store {
@@ -193,5 +197,12 @@ body {
     font-style: italic;
     color: #2c3e50;
   }
+}
+
+.green {
+  color: #42b983;
+}
+.bold {
+  font-weight: bold;
 }
 </style>

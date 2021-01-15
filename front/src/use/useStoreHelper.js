@@ -25,23 +25,23 @@ export default function useStoreHelpers() {
   })
 
   /* ------- store setters */
-  function setTokenInStore(token) {
+  function setStoreToken(token) {
     store.dispatch('setAccessToken', token)
   }
-  function setUserInStore(user) {
-    store.dispatch('setUserInStore', user)
+  function setStoreUser(user) {
+    store.dispatch('setStoreUser', user)
   }
-  function setTopTracksInStore(topTracks) {
-    store.dispatch('setTopTracksInStore', topTracks)
+  function setStoreTopTracks(topTracks) {
+    store.dispatch('setStoreTopTracks', topTracks)
   }
-  function setTopArtistsInStore(topArtists) {
-    store.dispatch('setTopArtistsInStore', topArtists)
+  function setStoreTopArtists(topArtists) {
+    store.dispatch('setStoreTopArtists', topArtists)
   }
-  function setTopTracksArtistsByTM(topTracksArtistsByTM) {
-    store.dispatch('setTopTracksArtistsByTM', topTracksArtistsByTM)
+  function setStoreTopTracksArtistsByTM(topTracksArtistsByTM) {
+    store.dispatch('setStoreTopTracksArtistsByTM', topTracksArtistsByTM)
   }
-  function setEventsInStore(events) {
-    store.dispatch('setEventsInStore', events)
+  function setStoreEvents(events) {
+    store.dispatch('setStoreEvents', events)
   }
   return {
     store,
@@ -50,14 +50,14 @@ export default function useStoreHelpers() {
     getStoreUser,
     getStoreTopTracks,
     getStoreTopArtists,
-    setTopArtistsInStore,
+    setStoreTopArtists,
     getStoreTopTracksArtistsByTM,
     getStoreEvents,
 
-    setTokenInStore,
-    setUserInStore,
-    setTopTracksInStore,
-    setTopTracksArtistsByTM,
-    setEventsInStore,
+    setStoreToken,
+    setStoreUser,
+    setStoreTopTracks,
+    setStoreTopTracksArtistsByTM,
+    setStoreEvents,
   }
 }

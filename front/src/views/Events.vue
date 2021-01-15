@@ -3,7 +3,7 @@
   <h1 class="name">{{ getStoreUser.display_name }},</h1>
   <p class="info">⬇️ Here are some upcoming events related to your favorite artists ⬇️</p>
   <div class="events">
-    <span v-if="isLoading">Loading</span>
+    <span v-if="isLoading">Work in progress</span>
     <div v-else class="results">
         <div
         v-for="(event, index) in getStoreEvents"
@@ -48,12 +48,12 @@ export default {
       getStoreTopTracksArtistsByTM,
       getStoreEvents,
 
-      setTokenInStore,
-      setUserInStore,
-      setTopTracksInStore,
-      setTopArtistsInStore,
-      setTopTracksArtistsByTM,
-      setEventsInStore,
+      setStoreToken,
+      setStoreUser,
+      setStoreTopTracks,
+      setStoreTopArtists,
+      setStoreTopTracksArtistsByTM,
+      setStoreEvents,
     } = useStoreHelper()
 
     /* ------- vue hooks */
@@ -61,10 +61,10 @@ export default {
       // console.log('onBeforeMount')
       if (!store.state.events.exists) {
         // topTracksArtistsByTM.value = await fetchArtistsByTM()
-        // setTopTracksArtistsByTM(topTracksArtistsByTM.value)
+        // setStoreTopTracksArtistsByTM(topTracksArtistsByTM.value)
         
         // events.value = await fetchEventsByTM(topTracksArtistsByTM.value.id)
-        // setEventsInStore(events.value)
+        // setStoreEvents(events.value)
       } else {
         console.log('nothing to update')
       }
@@ -114,12 +114,12 @@ export default {
       fetchArtistsByTM,
       fetchEventsByTM,
 
-      setTokenInStore,
-      setUserInStore,
-      setTopTracksInStore,
-      setTopArtistsInStore,
-      setTopTracksArtistsByTM,
-      setEventsInStore,
+      setStoreToken,
+      setStoreUser,
+      setStoreTopTracks,
+      setStoreTopArtists,
+      setStoreTopTracksArtistsByTM,
+      setStoreEvents,
 
       goToArtist,
     }

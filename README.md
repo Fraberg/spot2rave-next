@@ -7,9 +7,9 @@ MEVN app to fetch spotify top tracks + display related events
     - [x] vuex
     - [x] deploy https://spot2rave.herokuapp.com/
     - [x] basic ui design
+    - [x] [modularized composition API](https://www.vuemastery.com/courses/vue-3-essentials/modularizing)
 - ongoing:
     - [ ] plug to tm
-    - [ ] modularizing https://www.vuemastery.com/courses/vue-3-essentials/modularizing
     - [ ] plug to sk
     - [ ] implement go back/fw button on same page
 - to read
