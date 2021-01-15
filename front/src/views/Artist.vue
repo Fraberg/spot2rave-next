@@ -7,7 +7,7 @@
         <img class="image" :src="artist.image_med" />
         <div class="genres-pop">
           <p class="genres">{{ artist.genres ? artist.genres.join(', ') : '' }}</p>
-          <p class="followers">Followers: {{ artist.followers.total }}</p>
+          <p class="followers">Followers: {{ artist.followersNumeral }}</p>
           <p class="popularity">Popularité actuelle sur Spotify: {{ artist.popularity }}/100</p>
         </div>
     </div>
