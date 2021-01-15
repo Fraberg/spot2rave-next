@@ -8,7 +8,7 @@
         <div class="genres-pop">
           <p class="genres">{{ artist.genres ? artist.genres.join(', ') : '' }}</p>
           <p class="followers">Followers: {{ artist.followersNumeral }}</p>
-          <p class="popularity">Popularité actuelle sur Spotify: {{ artist.popularity }}/100</p>
+          <p class="popularity">Spotify popularity: {{ artist.popularity }}/100</p>
         </div>
     </div>
     <router-link :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }">Go back</router-link>

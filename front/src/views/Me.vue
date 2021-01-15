@@ -21,7 +21,7 @@
         <div class="name-artists-pop">
           <p class="artists">{{ track.artists.join(', ') }}</p>
           <p class="name">{{ track.name }}</p>
-          <p class="popularity">Popularité actuelle sur Spotify: {{ track.popularity }}/100</p>
+          <p class="popularity">Spotify popularity: {{ track.popularity }}/100</p>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="name-artists-pop">
           <p class="name">{{ artist.name }}</p>
           <p class="followers">{{ artist.followersNumeral }} followers</p>
-          <p class="popularity">Popularité actuelle sur Spotify: {{ artist.popularity }}/100</p>
+          <p class="popularity">Spotify popularity: {{ artist.popularity }}/100</p>
         </div>
       </div>
     </div>

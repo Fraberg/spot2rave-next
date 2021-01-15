@@ -18,7 +18,7 @@
         <div class="name-events-pop">
           <p class="name">{{ event.name }}</p>
           <!-- <p class="events">{{ event.events.join(', ') }}</p> -->
-          <p class="popularity">Popularité actuelle sur Spotify: {{ event.popularity }}/100</p>
+          <p class="popularity">Spotify popularity: {{ event.popularity }}/100</p>
         </div>
       </div>
     </div>
