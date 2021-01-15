@@ -6,8 +6,7 @@
   
   <div v-if="showTracks" class="me">
     <span v-if="isLoading">Loading</span>
-    <div v-if="isLoading" style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/l3nWhI38IWDofyDrW" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
-    <!-- <p><a href="https://giphy.com/gifs/thinking-l3nWhI38IWDofyDrW">via GIPHY</a></p> -->
+    <iframe v-if="isLoading" src="https://giphy.com/embed/l3nWhI38IWDofyDrW" width="350" height="350" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
     <div v-else class="results">
         <div
         v-for="(track, index) in getStoreTopTracks"
