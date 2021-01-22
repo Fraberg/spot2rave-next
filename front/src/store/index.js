@@ -8,6 +8,8 @@ export default createStore({
     topTracks: { exists: false },
     topArtists: { exists: false },
     topTracksArtistsByTM: { exists: false },
+    youtubeToken: { exists: false },
+    youtubePlaylists: { exists: false },
     events: { exists: false }
   },
   mutations: {
@@ -59,6 +61,22 @@ export default createStore({
       state.events.exists = true
       console.log('store | editEvents')
     },
+    editYoutubeToken(state, youtubeToken) {
+      if (state.youtubeToken.exists) {
+        return
+      }
+      state.youtubeToken.value = youtubeToken
+      state.youtubeToken.exists = true
+      console.log('store | editYoutubeToken')
+    },
+    editYoutubePlaylists(state, youtubePlaylists) {
+      if (state.youtubePlaylists.exists) {
+        return
+      }
+      state.youtubePlaylists.value = youtubePlaylists
+      state.youtubePlaylists.exists = true
+      console.log('store | editYoutubePlaylists')
+    },
   },
   actions: {
     setAccessToken ({ commit }, accesToken) {
@@ -78,6 +96,12 @@ export default createStore({
     },
     setStoreEvents ({ commit }, events) {
       commit('editEvents', events)
+    },
+    setYoutubeToken ({ commit }, youtubeToken) {
+      commit('editYoutubeToken', youtubeToken)
+    },
+    setYoutubePlaylists ({ commit }, youtubePlaylists) {
+      commit('editYoutubePlaylists', youtubePlaylists)
     },
   },
   modules: {

@@ -1,6 +1,10 @@
 <template>
-  <p class="">Google</p>
-  <p class="" style="font-size: 0.7rem;">access_token: {{ hash['access_token'] }}</p>
+    <p class="nice">Nice to meet you,</p>
+  <h1 class="name">[insert username],</h1>
+
+  <p class="info">⬇️ Here is a list of your playlists on youtube ️⬇️</p>
+  
+  <!-- <p class="" style="font-size: 0.7rem;">access_token: {{ hash['access_token'] }}</p> -->
   <div class="google">
     <!-- <span v-if="isLoading">Loading</span>
     <iframe v-if="isLoading" src="https://giphy.com/embed/l3nWhI38IWDofyDrW" width="350" height="350" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> -->

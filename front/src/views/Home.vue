@@ -3,7 +3,7 @@
     <h1>Welcome to Spotitops</h1>
     <p>
       1️⃣ Show me your favorite songs 😀<br>
-      2️⃣ Then I will search for your next music concerts 🤩<br>
+      2️⃣ Then I will search for your next music concerts 🤓<br>
       <br>
       ⬇️
     </p>

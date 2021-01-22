@@ -159,10 +159,11 @@ body {
 }
 
 .button--green {
+  font-weight: bold;
   background: white;
   display: inline-block;
   border-radius: 40px;
-  border: 1px solid #42b983;
+  border: 3px solid #42b983;
   color: #fff;
   background-color: #42b983;
   text-decoration: none;
@@ -175,10 +176,11 @@ body {
 }
 
 .button--red {
+  font-weight: bold;
   background: white;
   display: inline-block;
   border-radius: 40px;
-  border: 1px solid #c20000;
+  border: 3px solid #c20000;
   color: #fff;
   background-color: #c20000;
   text-decoration: none;
