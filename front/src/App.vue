@@ -1,4 +1,5 @@
 <template>
+  
   <div id="store" @click="appStateDisplay = !appStateDisplay">
     <p><b>toggle vuex store, for ppl who 👨‍💻</b></p>
     <span v-if="appStateDisplay">
@@ -16,6 +17,7 @@
       <a class="state" href="https://www.linkedin.com/in/francis-berger-a2404094/">any feedback? plzz tell me</a>
       </span>
   </div>
+
   <div id="nav">
     <router-link :to="{ name: 'Home' }"> 🏠 Home </router-link> 
     <span v-if="getStoreToken.exists">
@@ -24,7 +26,9 @@
       <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>      
     </span>
   </div>
+  
   <router-view />
+
 </template>
 
 <script>
@@ -159,14 +163,31 @@ body {
   display: inline-block;
   border-radius: 40px;
   border: 1px solid #42b983;
-  color: #42b983;
+  color: #fff;
+  background-color: #42b983;
   text-decoration: none;
   padding: 10px 30px;
 }
 
 .button--green:hover {
+  color: #42b983;
+  background-color: #fff;
+}
+
+.button--red {
+  background: white;
+  display: inline-block;
+  border-radius: 40px;
+  border: 1px solid #c20000;
   color: #fff;
-  background-color: #42b983;
+  background-color: #c20000;
+  text-decoration: none;
+  padding: 10px 30px;
+}
+
+.button--red:hover {
+  color: #c20000;
+  background-color: #fff;
 }
 
 button:focus {

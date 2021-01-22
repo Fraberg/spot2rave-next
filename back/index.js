@@ -11,6 +11,10 @@ app.use(cors());
 
 const spotify = require('./routes/api/spotify');
 app.use('/api/spotify', spotify);
+
+const google = require('./routes/api/google');
+app.use('/api/google', google);
+
 const ticketmaster = require('./routes/api/ticketmaster');
 app.use('/api/ticketmaster', ticketmaster);
 

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router
 import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Me from '@/views/Me.vue'
+import Google from '@/views/Google.vue'
 import Track from '@/views/Track.vue'
 import Artist from '@/views/Artist.vue'
 import More from '@/views/More.vue'
@@ -28,6 +29,11 @@ const routes = [
     name: 'Me',
     props: true,
     component: Me
+  },
+  {
+    path: '/google',
+    name: 'Google',
+    component: Google
   },
   {
     path: '/me/track/:id',

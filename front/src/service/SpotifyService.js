@@ -1,7 +1,7 @@
 import axios from 'axios'
-const mockUser = require('./mockUser')
-const mockTopTracks = require('./mockTopTracks')
-const mockTopArtists = require('./mockTopArtists')
+const mockUser = require('@/mock/mockUser')
+const mockTopTracks = require('@/mock/mockTopTracks')
+const mockTopArtists = require('@/mock/mockTopArtists')
 
 const UserEndpoint = 'https://api.spotify.com/v1/me'
 const topTracksEndpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50'

@@ -62,9 +62,10 @@ import numeral from 'numeral'
 
 import { ref, onBeforeMount, computed } from 'vue'
 import useStoreHelper from '@/use/useStoreHelper'
-import SpotifyService from '@/service/SpotifyService'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+
+import SpotifyService from '@/service/SpotifyService'
 
 export default {
   props: ['accesstoken'],
@@ -73,6 +74,7 @@ export default {
     const showTracks = ref(false)
     const topTracks = ref([])
     const topArtists = ref([])
+    const route = useRoute()
     const router = useRouter()
     const { 
       store,
@@ -94,7 +96,10 @@ export default {
 
     /* ------- vue hooks */
     onBeforeMount(async () => {
-      // console.log('onBeforeMount')
+      console.log('onBeforeMount')
+      console.log('props', props)
+      console.log('route.query', route.query)
+      console.log('route.params', route.params)
       if (props.accesstoken && !store.state.accesToken.exists) {
         setStoreToken(props.accesstoken)
         // User
@@ -159,6 +164,7 @@ export default {
       showTracks,
       topTracks,
       store,
+      route,
       router,
 
       getStoreToken,
@@ -187,6 +193,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .me {
   min-width: 300px;
   width: auto;

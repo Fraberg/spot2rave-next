@@ -1,6 +1,6 @@
 import axios from 'axios'
-const mockArtists = require('./mockArtists')
-const mockEvents = require('./mockEvents')
+const mockArtists = require('@/mock/mockArtists')
+const mockEvents = require('@/mock/mockEvents')
 
 const artistUrl = 'api/ticketmaster/artist/'
 const eventsUrl = 'api/ticketmaster/events/'

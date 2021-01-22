@@ -1,23 +1,12 @@
 <template>
   <div class="home">
-    <iframe
-      v-if="getStoreToken.exists"
-      src="https://giphy.com/embed/VIoXn1ZNsTidxeG9vX"
-      width="350"
-      height="350"
-      frameBorder="0"
-      class="giphy-embed"
-      allowFullScreen>
-    </iframe>
-    <p v-if="getStoreToken.exists">Yay! you already are connected to Spotify</p>
     <a
-      v-else
       :href="loginUrl"
       target="_blank"
       rel="noopener noreferrer"
-      class="button--green"
+      class="button--red"
     >
-      Connect with Spotify
+      Connect with Youtube Music
     </a>
     <br>
   </div>
@@ -25,7 +14,7 @@
 
 <script>
 import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
 
 export default {
   name: 'ConnectWithSpotify',
@@ -33,18 +22,18 @@ export default {
     const baseUrl = process.env.NODE_ENV === 'development'
       ? 'http://localhost:5000/'
       : 'https://spotitops.herokuapp.com/' // process.env.VUE_APP_API_BASE_URL
-    const loginUrl = `${baseUrl}api/spotify/login`
+    const loginUrl = `${baseUrl}api/google/login`
     console.log('loginUrl', loginUrl, '| process.env.NODE_ENV', process.env.NODE_ENV)
-    const store = useStore()
+    // const store = useStore()
 
     /* ------- computed */
-    const getStoreToken = computed(function() {
-      return store.state.accesToken
-    })
+    // const getStoreToken = computed(function() {
+    //   return store.state.accesToken
+    // })
     return { 
       loginUrl,
-      store,
-      getStoreToken
+      // store,
+      // getStoreToken
     }
   }
 }
