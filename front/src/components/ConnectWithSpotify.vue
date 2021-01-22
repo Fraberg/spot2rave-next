@@ -34,12 +34,12 @@ export default {
       ? 'http://localhost:5000/'
       : 'https://spotitops.herokuapp.com/' // process.env.VUE_APP_API_BASE_URL
     const loginUrl = `${baseUrl}api/spotify/login`
-    console.log('loginUrl', loginUrl, '| process.env.NODE_ENV', process.env.NODE_ENV)
+    // console.log('loginUrl', loginUrl, '| process.env.NODE_ENV', process.env.NODE_ENV)
     const store = useStore()
 
     /* ------- computed */
     const getStoreToken = computed(function() {
-      return store.state.accesToken
+      return store.state.spotify.accesToken
     })
     return { 
       loginUrl,

@@ -4,15 +4,13 @@
 
   <p class="info">⬇️ Here is a list of your playlists on youtube ️⬇️</p>
   
-  <!-- <p class="" style="font-size: 0.7rem;">access_token: {{ hash['access_token'] }}</p> -->
   <div class="google">
-    <!-- <span v-if="isLoading">Loading</span>
-    <iframe v-if="isLoading" src="https://giphy.com/embed/l3nWhI38IWDofyDrW" width="350" height="350" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> -->
-    <!-- <iframe src="https://giphy.com/embed/bMdZu3fG2ZEBO" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/abcnetwork-angry-upset-bMdZu3fG2ZEBO">via GIPHY</a></p> -->
-    <!-- <div v-else class="results"> -->
-    <div class="results">
+    <!-- <span v-if="isLoading">Loading</span> -->
+    <iframe v-if="isLoading" src="https://giphy.com/embed/l3nWhI38IWDofyDrW" width="350" height="350" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    
+    <div v-else class="results">
         <div
-        v-for="(playlist, index) in playlists"
+        v-for="(playlist, index) in getStoreYoutubePlaylists"
         :key="playlist.id"
         class="card"
         :item="playlist"
@@ -24,7 +22,7 @@
         <div class="name-artists-pop">
           <p class="name">{{ playlist.title }}</p>
           <p class="artists">{{ playlist.itemCount }} Item(s)</p>
-          <p class="popularity">Playlist id: {{ playlist.id }}</p>
+          <p class="popularity">id: {{ playlist.id }}</p>
         </div>
       </div>
     </div>
@@ -36,24 +34,38 @@
 const queryString = require('query-string')
 
 import { ref, onBeforeMount, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
+import useStoreHelper from '@/use/useStoreHelper'
 import GoogleService from '@/service/GoogleService'
 
 export default {
-//   props: ['#access_token'],
   setup(_) {
     const isLoading = ref(true)
-    const hash = ref([])
-    const playlists = ref([])
-    const route = useRoute()
-    const router = useRouter()
+
+    const { 
+      store,
+      //
+      getStoreGoogleToken,
+      getStoreYoutubePlaylists,
+      //
+      setStoreGoogleToken,
+    } = useStoreHelper()
 
     /* ------- vue hooks */
     onBeforeMount(async () => {
-      console.log('onBeforeMount')
-      hash.value = queryString.parse(window.location.hash)
-      playlists.value = await fetchUserPlaylist(hash.value['access_token'])
+      console.log('Google | onBeforeMount')
+      // hash.value = queryString.parse(window.location.hash)
+      if (!store.state.google.token.exists) {
+        const hash = queryString.parse(window.location.hash)
+        const token = hash['access_token']
+        if (token && !store.state.google.token.exists) {
+          store.dispatch('google/setGoogleToken', hash)
+          store.dispatch('google/setYoutubePlaylists', await fetchUserPlaylist(token))
+        } else {
+          console.log('nothing to update')
+        }
+      }
       isLoading.value = false
     })
 
@@ -68,9 +80,12 @@ export default {
 
     return {
       isLoading,
-      hash,
-      playlists,
-      route,
+
+      store,
+      getStoreGoogleToken,
+      getStoreYoutubePlaylists,
+      //
+      setStoreGoogleToken,
     }
   },
 }

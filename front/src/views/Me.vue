@@ -61,10 +61,10 @@
 import numeral from 'numeral'
 
 import { ref, onBeforeMount, computed } from 'vue'
-import useStoreHelper from '@/use/useStoreHelper'
 import { useRoute, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
 
+import useStoreHelper from '@/use/useStoreHelper'
 import SpotifyService from '@/service/SpotifyService'
 
 export default {
@@ -83,6 +83,9 @@ export default {
       getStoreUser,
       getStoreTopTracks,
       getStoreTopArtists,
+      //
+      getStoreGoogleToken,
+      //
       getStoreTopTracksArtistsByTM,
       getStoreEvents,
 
@@ -90,17 +93,20 @@ export default {
       setStoreUser,
       setStoreTopTracks,
       setStoreTopArtists,
+      //
+      setStoreGoogleToken,
+      //
       setStoreTopTracksArtistsByTM,
       setStoreEvents,
     } = useStoreHelper()
 
     /* ------- vue hooks */
     onBeforeMount(async () => {
-      console.log('onBeforeMount')
-      console.log('props', props)
-      console.log('route.query', route.query)
-      console.log('route.params', route.params)
-      if (props.accesstoken && !store.state.accesToken.exists) {
+      console.log('Me | onBeforeMount')
+      // console.log('props', props)
+      // console.log('route.query', route.query)
+      // console.log('route.params', route.params)
+      if (props.accesstoken && !store.state.spotify.accesToken.exists) {
         setStoreToken(props.accesstoken)
         // User
         const user = await fetchUser(props.accesstoken)
@@ -163,14 +169,19 @@ export default {
       isLoading,
       showTracks,
       topTracks,
-      store,
       route,
       router,
+
+      // ---
+      store,
 
       getStoreToken,
       getStoreUser,
       getStoreTopTracks,
       getStoreTopArtists,
+      //
+      getStoreGoogleToken,
+      //
       getStoreTopTracksArtistsByTM,
       getStoreEvents,
 
@@ -182,8 +193,12 @@ export default {
       setStoreUser,
       setStoreTopTracks,
       setStoreTopArtists,
+      //
+      setStoreGoogleToken,
+      //
       setStoreTopTracksArtistsByTM,
       setStoreEvents,
+      // ---
 
       goToTrack,
       goToArtist,

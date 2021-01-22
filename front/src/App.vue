@@ -5,10 +5,11 @@
     <span v-if="appStateDisplay">
       <br>
       <p class="state">
-        - sp token: 🔑 <span class="value">{{ displayStoreToken() }}</span> <br>
+        - sp token: 🔑 <span class="value">{{ store.state.spotify.accesToken.value.substr(0, 25) }}</span> <br>
         - sp user: <span class="value">{{ displayStoreUser() }}</span> <br>
         - sp topTracks: <span class="value">{{ displayStoreTopTracks() }}</span> <br>
         - sp topArtists: <span class="value">{{ displayStoreTopArtists() }}</span> <br>
+        - ym token: 🔑 <span class="value">{{ displayStoreGoogleToken() }}</span> <br>
         - tm events: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
         <br>
       </p>
@@ -25,6 +26,11 @@
       <router-link  :to="{ name: 'Events' }"> | 📅 Events </router-link>
       <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>      
     </span>
+    <span v-if="getStoreGoogleToken.exists">
+      <router-link :to="{ name: 'Google' }"> | 😎 Gg </router-link>
+      <router-link  :to="{ name: 'Events' }"> | 📅 Events </router-link>
+      <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>      
+    </span>
   </div>
   
   <router-view />
@@ -32,79 +38,73 @@
 </template>
 
 <script>
-import { useStore } from 'vuex'
 import { ref, computed } from 'vue'
 
-export default {
-  setup(props) {
-    const store = useStore()
-    const appStateDisplay = ref(false)
+import useStoreHelper from '@/use/useStoreHelper'
 
-    // computed
-    const getStoreToken = computed(function() {
-        return store.state.accesToken
-    })
-    const getStoreUser = computed(function() {
-        return store.state.user
-    })
-    const getStoreTopTracks = computed(function() {
-        return store.state.topTracks
-    })
-    const getStoreTopArtists = computed(function() {
-      return store.state.topArtists
-    })
-    const getStoreEvents = computed(function() {
-        return store.state.events
-    })
+export default {
+  setup() {
+    const appStateDisplay = ref(false)
+    const { 
+      store,
+      getStoreToken,
+      getStoreUser,
+      getStoreTopTracks,
+      getStoreTopArtists,
+      getStoreGoogleToken,
+      getStoreEvents,
+    } = useStoreHelper()
     
     // function 
-    function displayStoreToken() {
-      if (getStoreToken.value.exists) {
-        return `${getStoreToken.value.value.substr(0, 25)} [...]`
-      } else {
-        return 'connect w/ spotify'
-      }
-    }
     function displayStoreUser() {
       if (getStoreUser.value.exists) {
         return `${JSON.stringify(getStoreUser.value).substr(0, 25)} [...]`
-      } else {
-        return 'connect w/ spotify'
       }
+      return 'connect w/ spotify'
     }
     function displayStoreTopTracks() {
       if (getStoreTopTracks.value.exists) {
         return `${JSON.stringify(getStoreTopTracks.value.map(t => t.name)).substr(0, 25)} [...]`
-      } else {
-        return 'connect w/ spotify'
       }
+      return 'connect w/ spotify'
     }
     function displayStoreTopArtists() {
       if (getStoreTopArtists.value.exists) {
         return `${JSON.stringify(getStoreTopArtists.value.map(a => a.name)).substr(0, 25)} [...]`
-      } else {
-        return 'connect w/ spotify'
       }
+      return 'connect w/ spotify'
     }
+    //
+    function displayStoreGoogleToken() {
+      if (getStoreGoogleToken.exists) {
+        return `${JSON.stringify(getStoreGoogleToken.value).substr(0, 25)} [...]`
+      }
+      return 'connect w/ youtube music'
+    }
+    //
     function displayStoreEventSuggestions() {
       if (getStoreEvents.value.exists) {
         return `${JSON.stringify(getStoreEvents.value).substr(0, 25)} [...]`
-      } else {
-        return 'feature not implemented'
       }
+      return 'feature not implemented'
     }
     return {
-      store,
       appStateDisplay,
 
+      store,
       getStoreToken,
       getStoreUser,
       getStoreTopTracks,
+      getStoreTopArtists,
+      getStoreGoogleToken,
       getStoreEvents,
 
-      displayStoreToken,
+      // displayStoreToken,
       displayStoreUser,
       displayStoreTopTracks,
+      //
+      displayStoreGoogleToken,
+      //
       displayStoreTopArtists,
       displayStoreEventSuggestions,
     }
