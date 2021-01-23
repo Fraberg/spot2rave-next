@@ -1,6 +1,6 @@
 <template>
   <p class="nice">Just for you,</p>
-  <h1 class="name">{{ getStoreUser.display_name }},</h1>
+  <h1 class="name">{{ getStoreUser.value.display_name }},</h1>
   <p class="info">⬇️ Here are some upcoming events related to your favorite artists ⬇️</p>
   <div class="events">
     <span v-if="isLoading">Work in progress</span>

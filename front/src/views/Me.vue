@@ -1,8 +1,9 @@
 <template>
   <p class="nice">Nice to meet you,</p>
-  <h1 class="name">{{ getStoreUser.display_name }},</h1>
+  <h1 class="name">{{ getStoreUser.value.display_name }},</h1>
 
-  <p class="info">⬇️ Here is you <span class="green bold">top {{ showTracks ? getStoreTopTracks.length : getStoreTopArtists.length }} spotify</span> {{ showTracks ? 'tracks 🎵' : 'artists 👨‍🎤' }} ️⬇️</p>
+  <p class="info">Here is you <span class="green bold">top {{ showTracks ? getStoreTopTracks.value.length : getStoreTopArtists.value.length }} spotify</span> {{ showTracks ? 'tracks 🎵' : 'artists 👨‍🎤' }}</p>
+  <p class="info">⬇️</p>
   
   <div v-if="showTracks" class="me">
     <span v-if="isLoading">Loading</span>
@@ -10,7 +11,7 @@
     <!-- <iframe src="https://giphy.com/embed/bMdZu3fG2ZEBO" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/abcnetwork-angry-upset-bMdZu3fG2ZEBO">via GIPHY</a></p> -->
     <div v-else class="results">
         <div
-        v-for="(track, index) in getStoreTopTracks"
+        v-for="(track, index) in getStoreTopTracks.value"
         :key="track.id"
         class="card"
         :item="track"
@@ -32,7 +33,7 @@
     <span v-if="isLoading">Loading</span>
     <div v-else class="results">
         <div
-        v-for="(artist, index) in getStoreTopArtists"
+        v-for="(artist, index) in getStoreTopArtists.value"
         :key="artist.id"
         class="card"
         :item="artist"
@@ -62,7 +63,6 @@ import numeral from 'numeral'
 
 import { ref, onBeforeMount, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-// import { useStore } from 'vuex'
 
 import useStoreHelper from '@/use/useStoreHelper'
 import SpotifyService from '@/service/SpotifyService'
@@ -83,21 +83,11 @@ export default {
       getStoreUser,
       getStoreTopTracks,
       getStoreTopArtists,
-      //
-      getStoreGoogleToken,
-      //
-      getStoreTopTracksArtistsByTM,
-      getStoreEvents,
 
       setStoreToken,
       setStoreUser,
       setStoreTopTracks,
       setStoreTopArtists,
-      //
-      setStoreGoogleToken,
-      //
-      setStoreTopTracksArtistsByTM,
-      setStoreEvents,
     } = useStoreHelper()
 
     /* ------- vue hooks */
@@ -172,18 +162,12 @@ export default {
       route,
       router,
 
-      // ---
       store,
 
       getStoreToken,
       getStoreUser,
       getStoreTopTracks,
       getStoreTopArtists,
-      //
-      getStoreGoogleToken,
-      //
-      getStoreTopTracksArtistsByTM,
-      getStoreEvents,
 
       fetchUser,
       fetchTopTracks,
@@ -193,12 +177,6 @@ export default {
       setStoreUser,
       setStoreTopTracks,
       setStoreTopArtists,
-      //
-      setStoreGoogleToken,
-      //
-      setStoreTopTracksArtistsByTM,
-      setStoreEvents,
-      // ---
 
       goToTrack,
       goToArtist,

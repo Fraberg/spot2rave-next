@@ -27,6 +27,7 @@ class GoogleService {
             image_default: item.snippet.thumbnails.default.url,
             publishedAt: item.publishedAt,
             itemCount: item.contentDetails ? item.contentDetails.itemCount : 0,
+            channelTitle: item.snippet.channelTitle,
           }))
           playlist = playlist.sort((a, b) => parseFloat(b.itemCount) - parseFloat(a.itemCount))
           resolve(playlist)
@@ -51,6 +52,7 @@ class GoogleService {
         image_default: item.snippet.thumbnails.default.url,
         publishedAt: item.publishedAt,
         itemCount: item.contentDetails ? item.contentDetails.itemCount : 0,
+        channelTitle: item.snippet.channelTitle,
       }))
       playlist = playlist.sort((a, b) => parseFloat(b.itemCount) - parseFloat(a.itemCount))
       resolve(playlist)

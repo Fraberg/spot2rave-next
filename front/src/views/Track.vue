@@ -47,15 +47,15 @@ export default {
     
     /* ------- computed */
   const getStoreToken = computed(function() {
-      return store.state.accesToken
+      return store.state.spotify.accesToken
     })
     const getStoreTracks = computed(function() {
-      return store.state.topTracks
+      return store.state.spotify.topTracks
     })
 
     /* ------- functions */
     function getTrack(id) {
-      return getStoreTracks.value.find(t => t.id === props.id)
+      return getStoreTracks.value.value.find(t => t.id === props.id)
     }
     
     // router

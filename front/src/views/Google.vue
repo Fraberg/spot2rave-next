@@ -1,8 +1,9 @@
 <template>
     <p class="nice">Nice to meet you,</p>
-  <h1 class="name">[insert username],</h1>
+  <h1 class="name">{{ getStoreGoogleUsername.value }}</h1>
 
-  <p class="info">⬇️ Here is a list of your playlists on youtube ️⬇️</p>
+  <p class="info">See below your youtube playlists</p>
+  <p class="info">⬇️</p>
   
   <div class="google">
     <!-- <span v-if="isLoading">Loading</span> -->
@@ -10,19 +11,19 @@
     
     <div v-else class="results">
         <div
-        v-for="(playlist, index) in getStoreYoutubePlaylists"
+        v-for="(playlist, index) in getStoreYoutubePlaylists.value"
         :key="playlist.id"
         class="card"
         :item="playlist"
         :index="index"
-        @click="goToTrack(playlist.id)"
+        @click="goToPlaylist(playlist.id)"
         >
         <p class="index">{{ index + 1 }}</p>
         <img class="image" :src="playlist.image_default" />
         <div class="name-artists-pop">
           <p class="name">{{ playlist.title }}</p>
           <p class="artists">{{ playlist.itemCount }} Item(s)</p>
-          <p class="popularity">id: {{ playlist.id }}</p>
+          <p class="popularity">User: {{ playlist.channelTitle }}</p>
         </div>
       </div>
     </div>
@@ -34,7 +35,7 @@
 const queryString = require('query-string')
 
 import { ref, onBeforeMount, computed } from 'vue'
-import { useStore } from 'vuex'
+import { useRoute, useRouter } from 'vue-router'
 
 import useStoreHelper from '@/use/useStoreHelper'
 import GoogleService from '@/service/GoogleService'
@@ -42,11 +43,13 @@ import GoogleService from '@/service/GoogleService'
 export default {
   setup(_) {
     const isLoading = ref(true)
+    const router = useRouter()
 
     const { 
       store,
       //
       getStoreGoogleToken,
+      getStoreGoogleUsername,
       getStoreYoutubePlaylists,
       //
       setStoreGoogleToken,
@@ -61,7 +64,11 @@ export default {
         const token = hash['access_token']
         if (token && !store.state.google.token.exists) {
           store.dispatch('google/setGoogleToken', hash)
-          store.dispatch('google/setYoutubePlaylists', await fetchUserPlaylist(token))
+          const playlists = await fetchUserPlaylist(token)
+          store.dispatch('google/setYoutubePlaylists', playlists)
+          const username = playlists[0].channelTitle
+          store.dispatch('google/setUsername', username)
+          console.log('username:', username)
         } else {
           console.log('nothing to update')
         }
@@ -71,21 +78,30 @@ export default {
 
     // fetch
     async function fetchUserPlaylist(token) {
-      // console.log('fetchPlaylist | token:', token)
       const data = process.env.NODE_ENV === 'development'
       ? await GoogleService.getMockUserPlaylists(token)
       : await GoogleService.getUserPlaylists(token)
       return data
     }
 
+    // router
+    function goToPlaylist(id) {
+      console.log('goToPlaylist', id)
+      router.push(`/google/playlist/${id}`)
+    }
+
     return {
       isLoading,
+      router,
 
       store,
       getStoreGoogleToken,
+      getStoreGoogleUsername,
       getStoreYoutubePlaylists,
       //
       setStoreGoogleToken,
+
+      goToPlaylist,
     }
   },
 }

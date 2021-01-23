@@ -4,7 +4,7 @@ import About from '@/views/About.vue'
 import Me from '@/views/Me.vue'
 import Google from '@/views/Google.vue'
 import Track from '@/views/Track.vue'
-// import Playlist from '@/views/Playlist.vue'
+import Playlist from '@/views/Playlist.vue'
 import Artist from '@/views/Artist.vue'
 import More from '@/views/More.vue'
 import Events from '@/views/Events.vue'
@@ -36,11 +36,12 @@ const routes = [
     name: 'Google',
     component: Google
   },
-  // {
-  //   path: '/google/playlists/:id',
-  //   name: 'Playlist',
-  //   component: Playlist
-  // },
+  {
+    path: '/google/playlist/:id',
+    name: 'Playlist',
+    props: true,
+    component: Playlist
+  },
   {
     path: '/me/track/:id',
     name: 'Track',
@@ -48,7 +49,7 @@ const routes = [
     component: Track
   },
   {
-    path: '/me/artist/:id/',
+    path: '/me/artist/:id',
     name: 'Artist',
     props: true,
     component: Artist

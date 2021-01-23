@@ -20,9 +20,8 @@
 
 <script>
 import { ref, onBeforeMount, computed } from 'vue'
-// import SpotifyService from '@/service/SpotifyService'
+import useStoreHelper from '@/use/useStoreHelper'
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
 
 export default {
   props: ['id'],
@@ -30,13 +29,17 @@ export default {
     const isLoading = ref(true)
     const artist = ref({})
     const router = useRouter()
-    const store = useStore()
+    const { 
+      store,
+      getStoreToken,
+      getStoreTopArtists,
+    } = useStoreHelper()
 
     /* ------- vue hooks */
     onBeforeMount(async () => {
-      //   console.log('onBeforeMount')
+        console.log('Artist | onBeforeMount')
       //   console.log('props:', props)
-      if (getStoreArtists.value.exists) {
+      if (getStoreTopArtists.value.exists) {
         artist.value = getArtist(props.id)
         isLoading.value = false
       } else {
@@ -44,18 +47,10 @@ export default {
         router.push('/')
       }
     })
-    
-    /* ------- computed */
-  const getStoreToken = computed(function() {
-      return store.state.accesToken
-    })
-    const getStoreArtists = computed(function() {
-      return store.state.topArtists
-    })
 
     /* ------- functions */
     function getArtist(id) {
-      return getStoreArtists.value.find(t => t.id === props.id)
+      return getStoreTopArtists.value.value.find(t => t.id === id)
     }
     
     // router
@@ -67,10 +62,10 @@ export default {
         isLoading,
         artist,
         router,
-        store,
 
+        store,
         getStoreToken,
-        getStoreArtists,
+        getStoreTopArtists,
 
         goBack,
     }

@@ -10,6 +10,7 @@
         - sp topTracks: <span class="value">{{ displayStoreTopTracks() }}</span> <br>
         - sp topArtists: <span class="value">{{ displayStoreTopArtists() }}</span> <br>
         - ym token: 🔑 <span class="value">{{ displayStoreGoogleToken() }}</span> <br>
+        - ym playlist: <span class="value">{{ displayStoreYoutubePlaylists() }}</span> <br>
         - tm events: <span class="value">{{ displayStoreEventSuggestions() }}</span> <br>
         <br>
       </p>
@@ -27,7 +28,7 @@
       <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>      
     </span>
     <span v-if="getStoreGoogleToken.exists">
-      <router-link :to="{ name: 'Google' }"> | 😎 Gg </router-link>
+      <router-link :to="{ name: 'Google' }"> | 😎 YM </router-link>
       <router-link  :to="{ name: 'Events' }"> | 📅 Events </router-link>
       <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>      
     </span>
@@ -52,39 +53,49 @@ export default {
       getStoreTopTracks,
       getStoreTopArtists,
       getStoreGoogleToken,
+      getStoreYoutubePlaylists,
       getStoreEvents,
     } = useStoreHelper()
     
     // function 
     function displayStoreUser() {
       if (getStoreUser.value.exists) {
-        return `${JSON.stringify(getStoreUser.value).substr(0, 25)} [...]`
+        return `${JSON.stringify(getStoreUser.value.value).substr(0, 25)} [...]`
       }
       return 'connect w/ spotify'
     }
     function displayStoreTopTracks() {
       if (getStoreTopTracks.value.exists) {
-        return `${JSON.stringify(getStoreTopTracks.value.map(t => t.name)).substr(0, 25)} [...]`
+        console.log('getStoreTopTracks.value.value', getStoreTopTracks.value.value)
+        console.log('typeof getStoreTopTracks.value.value', typeof getStoreTopTracks.value.value)
+        return `${JSON.stringify(getStoreTopTracks.value.value.map(t => t.name)).substr(0, 25)} [...]`
       }
       return 'connect w/ spotify'
     }
     function displayStoreTopArtists() {
       if (getStoreTopArtists.value.exists) {
-        return `${JSON.stringify(getStoreTopArtists.value.map(a => a.name)).substr(0, 25)} [...]`
+        return `${JSON.stringify(getStoreTopArtists.value.value.map(a => a.name)).substr(0, 25)} [...]`
+      }
+      return 'connect w/ spotify'
+    }
+    //
+    function displayStoreYoutubePlaylists() {
+      if (getStoreYoutubePlaylists.value.exists) {
+        return `${JSON.stringify(getStoreYoutubePlaylists.value.value.map(p => p.title)).substr(0, 25)} [...]`
       }
       return 'connect w/ spotify'
     }
     //
     function displayStoreGoogleToken() {
-      if (getStoreGoogleToken.exists) {
-        return `${JSON.stringify(getStoreGoogleToken.value).substr(0, 25)} [...]`
+      if (getStoreGoogleToken.value.exists) {
+        return `${JSON.stringify(getStoreGoogleToken.value.value).substr(0, 25)} [...]`
       }
       return 'connect w/ youtube music'
     }
     //
     function displayStoreEventSuggestions() {
       if (getStoreEvents.value.exists) {
-        return `${JSON.stringify(getStoreEvents.value).substr(0, 25)} [...]`
+        return `${JSON.stringify(getStoreEvents.value.value).substr(0, 25)} [...]`
       }
       return 'feature not implemented'
     }
@@ -97,6 +108,7 @@ export default {
       getStoreTopTracks,
       getStoreTopArtists,
       getStoreGoogleToken,
+      getStoreYoutubePlaylists,
       getStoreEvents,
 
       // displayStoreToken,
@@ -104,6 +116,7 @@ export default {
       displayStoreTopTracks,
       //
       displayStoreGoogleToken,
+      displayStoreYoutubePlaylists,
       //
       displayStoreTopArtists,
       displayStoreEventSuggestions,

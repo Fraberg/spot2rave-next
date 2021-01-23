@@ -11,6 +11,7 @@ export default function useStoreHelpers() {
   const getStoreTopArtists = computed(() => store.state.spotify.topArtists)
   //
   const getStoreGoogleToken = computed(() => store.state.google.token)
+  const getStoreGoogleUsername = computed(() => store.state.google.username)
   const getStoreYoutubePlaylists = computed(() => store.state.google.playlists)
   //
   const getStoreTopTracksArtistsByTM = computed(() => store.state.topTracksArtistsByTM)
@@ -23,6 +24,8 @@ export default function useStoreHelpers() {
   const setStoreTopArtists = (topArtists) => store.dispatch('spotify/setStoreTopArtists', topArtists)
   //
   const setStoreGoogleToken = (token) => store.dispatch('google/setGoogleToken', token)
+  const setStoreYoutubePlaylists = (playlists) => store.dispatch('google/setYoutubePlaylists', playlists)
+  const setStoreYoutubeUsername = (name) => store.dispatch('google/setUsername', name)
   //
   const setStoreTopTracksArtistsByTM = (topTracksArtistsByTM) => store.dispatch('setStoreTopTracksArtistsByTM', topTracksArtistsByTM)
   const setStoreEvents = (events) => store.dispatch('setStoreEvents', events)
@@ -37,6 +40,7 @@ export default function useStoreHelpers() {
     setStoreTopArtists,
     // ---
     getStoreGoogleToken,
+    getStoreGoogleUsername,
     getStoreYoutubePlaylists,
     // ---
     getStoreTopTracksArtistsByTM,

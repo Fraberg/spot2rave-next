@@ -1,8 +1,8 @@
 const state = {
   accesToken: { exists: false, value: 'connect w/ spotify' },
-  user: { exists: false, value: {} },
-  topTracks: { exists: false, value: {} },
-  topArtists: { exists: false, value: {} },
+  user: { exists: false },
+  topTracks: { exists: false },
+  topArtists: { exists: false },
 }
 
 // getterss
@@ -22,7 +22,7 @@ const mutations = {
     if (state.user.exists) {
       return
     }
-    state.user = user
+    state.user.value = user
     state.user.exists = true
     console.log('Store | editUser')
   },
@@ -30,7 +30,7 @@ const mutations = {
     if (state.topTracks.exists) {
       return
     }
-    state.topTracks = topTracks
+    state.topTracks.value = topTracks
     state.topTracks.exists = true
     console.log('Store | topTracks')
   },
@@ -38,7 +38,7 @@ const mutations = {
     if (state.topArtists.exists) {
       return
     }
-    state.topArtists = topArtists
+    state.topArtists.value = topArtists
     state.topArtists.exists = true
     console.log('Store | topArtists')
   },
