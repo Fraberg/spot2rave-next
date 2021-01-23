@@ -37,7 +37,7 @@ const routes = [
     component: Google
   },
   {
-    path: '/google/playlist/:id',
+    path: '/ymplaylist/:id',
     name: 'Playlist',
     props: true,
     component: Playlist

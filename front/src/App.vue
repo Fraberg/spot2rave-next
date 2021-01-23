@@ -5,7 +5,7 @@
     <span v-if="appStateDisplay">
       <br>
       <p class="state">
-        - sp token: 🔑 <span class="value">{{ store.state.spotify.accesToken.value.substr(0, 25) }}</span> <br>
+        <!-- - sp token: 🔑 <span class="value">{{ store.state.spotify.accesToken.value.substr(0, 25) }}</span> <br> -->
         - sp user: <span class="value">{{ displayStoreUser() }}</span> <br>
         - sp topTracks: <span class="value">{{ displayStoreTopTracks() }}</span> <br>
         - sp topArtists: <span class="value">{{ displayStoreTopArtists() }}</span> <br>
@@ -29,7 +29,7 @@
     </span>
     <span v-if="getStoreGoogleToken.exists">
       <router-link :to="{ name: 'Google' }"> | 😎 YM </router-link>
-      <router-link  :to="{ name: 'Events' }"> | 📅 Events </router-link>
+      <!-- <router-link  :to="{ name: 'Events' }"> | 📅 Events </router-link> -->
       <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>      
     </span>
   </div>
@@ -66,8 +66,8 @@ export default {
     }
     function displayStoreTopTracks() {
       if (getStoreTopTracks.value.exists) {
-        console.log('getStoreTopTracks.value.value', getStoreTopTracks.value.value)
-        console.log('typeof getStoreTopTracks.value.value', typeof getStoreTopTracks.value.value)
+        // console.log('getStoreTopTracks.value.value', getStoreTopTracks.value.value)
+        // console.log('typeof getStoreTopTracks.value.value', typeof getStoreTopTracks.value.value)
         return `${JSON.stringify(getStoreTopTracks.value.value.map(t => t.name)).substr(0, 25)} [...]`
       }
       return 'connect w/ spotify'

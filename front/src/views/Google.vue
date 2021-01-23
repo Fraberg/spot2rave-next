@@ -10,21 +10,21 @@
     <iframe v-if="isLoading" src="https://giphy.com/embed/l3nWhI38IWDofyDrW" width="350" height="350" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
     
     <div v-else class="results">
-        <div
+      <div
         v-for="(playlist, index) in getStoreYoutubePlaylists.value"
         :key="playlist.id"
         class="card"
         :item="playlist"
         :index="index"
         @click="goToPlaylist(playlist.id)"
-        >
-        <p class="index">{{ index + 1 }}</p>
-        <img class="image" :src="playlist.image_default" />
-        <div class="name-artists-pop">
-          <p class="name">{{ playlist.title }}</p>
-          <p class="artists">{{ playlist.itemCount }} Item(s)</p>
-          <p class="popularity">User: {{ playlist.channelTitle }}</p>
-        </div>
+      >
+          <p class="index">{{ index + 1 }}</p>
+          <img class="image" :src="playlist.image_default" />
+          <div class="name-artists-pop">
+            <p class="name">{{ playlist.title }}</p>
+            <p class="artists">{{ playlist.itemCount }} Item(s)</p>
+            <p class="popularity">User: {{ playlist.channelTitle }}</p>
+          </div>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@ import useStoreHelper from '@/use/useStoreHelper'
 import GoogleService from '@/service/GoogleService'
 
 export default {
-  setup(_) {
+  setup() {
     const isLoading = ref(true)
     const router = useRouter()
 
@@ -60,24 +60,25 @@ export default {
       console.log('Google | onBeforeMount')
       // hash.value = queryString.parse(window.location.hash)
       if (!store.state.google.token.exists) {
+        console.log('update')
         const hash = queryString.parse(window.location.hash)
         const token = hash['access_token']
-        if (token && !store.state.google.token.exists) {
+        if (token) {
           store.dispatch('google/setGoogleToken', hash)
-          const playlists = await fetchUserPlaylist(token)
+          const playlists = await fetchUserPlaylists(token)
           store.dispatch('google/setYoutubePlaylists', playlists)
           const username = playlists[0].channelTitle
           store.dispatch('google/setUsername', username)
           console.log('username:', username)
-        } else {
-          console.log('nothing to update')
         }
+      } else {
+        console.log('nothing to update')
       }
       isLoading.value = false
     })
 
     // fetch
-    async function fetchUserPlaylist(token) {
+    async function fetchUserPlaylists(token) {
       const data = process.env.NODE_ENV === 'development'
       ? await GoogleService.getMockUserPlaylists(token)
       : await GoogleService.getUserPlaylists(token)
@@ -87,7 +88,7 @@ export default {
     // router
     function goToPlaylist(id) {
       console.log('goToPlaylist', id)
-      router.push(`/google/playlist/${id}`)
+      router.push(`/ymplaylist/${id}`)
     }
 
     return {

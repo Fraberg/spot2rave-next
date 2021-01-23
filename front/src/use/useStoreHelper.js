@@ -13,6 +13,8 @@ export default function useStoreHelpers() {
   const getStoreGoogleToken = computed(() => store.state.google.token)
   const getStoreGoogleUsername = computed(() => store.state.google.username)
   const getStoreYoutubePlaylists = computed(() => store.state.google.playlists)
+  // const getStorePlaylistItems = computed((playlistId) => store.state.google.playlistItems[playlistId])
+  const getStorePlaylistItems = computed(() => store.state.google.playlistItems)
   //
   const getStoreTopTracksArtistsByTM = computed(() => store.state.topTracksArtistsByTM)
   const getStoreEvents = computed(() => store.state.events)
@@ -42,6 +44,7 @@ export default function useStoreHelpers() {
     getStoreGoogleToken,
     getStoreGoogleUsername,
     getStoreYoutubePlaylists,
+    getStorePlaylistItems,
     // ---
     getStoreTopTracksArtistsByTM,
     getStoreEvents,

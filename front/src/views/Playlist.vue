@@ -1,15 +1,35 @@
 <template>
   <div class="playlist">
+    <router-link :to="{ name: 'Google' }">Go back</router-link>
+
     <span v-if="isLoading">Loading</span>
     <div v-else class="results">
+        
         <h1>{{ playlist.title }}</h1>
         <img class="image" :src="playlist.image_default" />
         <div class="name-artists-pop">
           <p class="artists">{{ playlist.itemCount }}</p>
-          <p class="name">{{ playlist.channelTitle }}</p>
+          <p class="name">{{ playlist.publishedAt }}</p>
         </div>
+
+        <!-- {{ getStorePlaylistItems }} -->
+        <div 
+          v-for="(item, index) in getStorePlaylistItems.value"
+          :key="item.id"
+          class="card"
+          :item="item"
+          :index="index"
+        >
+            <p class="index">{{ item.position + 1 }}</p>
+            <img class="image" :src="item.image_default" />
+            <div class="name-artists-pop">
+              <p class="name">{{ item.title }}</p>
+              <p class="artists">{{ item.description }} Item(s)</p>
+              <p class="popularity">User: {{ item.publishedAt }}</p>
+            </div>
+        </div>
+
     </div>
-    <router-link :to="{ name: 'Google' }">Go back</router-link>
     <br>
     <br>
     <br>
@@ -27,22 +47,27 @@ export default {
   props: ['id'],
   setup(props) {
     const isLoading = ref(true)
+    const refId = ref(props.id)
     const playlist = ref({})
     const router = useRouter()
-
     const { 
       store,
-      //
+      getStoreGoogleToken,
       getStoreYoutubePlaylists,
+      getStorePlaylistItems,
     } = useStoreHelper()
 
     /* ------- vue hooks */
     onBeforeMount(async () => {
       console.log('Playlist | onBeforeMount')
-      console.log('props:', props)
-      console.log('props.id:', props.id)
+      console.log('props', props)
       if (getStoreYoutubePlaylists.value.exists) {
         playlist.value = getPlaylist(props.id)
+        console.log('playlist.value', playlist.value)
+        const token = getStoreGoogleToken.value.value.access_token
+        const items = await fetchPlaylistItems(token, props.id)
+        console.log('items', items)
+        store.dispatch('google/setYoutubePlaylistItems', items)
         isLoading.value = false
       } else {
         console.log('store has been reset, back to /')
@@ -53,9 +78,22 @@ export default {
     /* ------- functions */
     function getPlaylist(id) {
       console.log('getPlaylist id:', id)
+
+      console.log('store.state.google.playlists:', store.state.google.playlists.value)
+
+      console.log('getStoreYoutubePlaylists.value.value:', getStoreYoutubePlaylists.value.value)
+      
       return getStoreYoutubePlaylists.value.value.find(p => p.id === id)
     }
     
+    // fetch
+    async function fetchPlaylistItems(token, playlistId) {
+      const data = process.env.NODE_ENV === 'development'
+      ? await GoogleService.getMockPlaylistItems(token, playlistId)
+      : await GoogleService.getPlaylistItems(token, playlistId)
+      return data
+    }
+
     // router
     function goBack() {
       router.go(-1)
@@ -63,12 +101,17 @@ export default {
 
     return {
       isLoading,
+      refId,
       playlist,
       router,
       
       store,
+      getStoreGoogleToken,
       getStoreYoutubePlaylists,
+      getStorePlaylistItems,
+
       getPlaylist,
+      fetchPlaylistItems,
 
       goBack,
     }
