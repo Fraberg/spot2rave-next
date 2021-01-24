@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import spotify from '@/store/modules/spotify'
 import google from '@/store/modules/google'
+import users from '@/store/modules/users'
 
 export default createStore({
   state: {
@@ -37,5 +38,6 @@ export default createStore({
   modules: {
     spotify,
     google,
+    users,
   }
 })

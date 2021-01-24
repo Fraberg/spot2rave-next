@@ -1,30 +1,24 @@
 <template>
-  <div class="playlist">
+  <div class="compare">
     <router-link :to="{ name: 'Google' }">Go back</router-link>
 
     <span v-if="isLoading">Loading</span>
     <div v-else class="results">
         
-        <h1>{{ playlist.title }}</h1>
-        <!-- <img class="image" :src="playlist.image_default" /> -->
-        <div class="name-artists-pop">
-          <p class="artists">{{ playlist.itemCount }} items</p>
-        </div>
 
         <div 
-          v-for="(item, index) in getStorePlaylistItems.value[refId]"
-          :key="item.id"
+          v-for="(user, index) in getStoreConnectedUsers.value"
+          :key="user.id"
           class="card"
-          :item="item"
+          :user="user"
           :index="index"
         >
-            <p class="index">{{ item.position + 1 }}</p>
-            <img class="image" :src="item.image_default" />
+            <p class="index">{{ user.name }}</p>
+            <!-- <img class="image" :src="user.image_default" />
             <div class="name-artists-pop">
-              <p class="name">{{ item.title.substr(0, 40) }}</p>
-              <p class="artists">Description: {{ item.description.substr(0, 40) }} [...]</p>
-              <!-- <p class="popularity">Date: {{ item.publishedAt }}</p> -->
-            </div>
+              <p class="name">{{ user.title.substr(0, 40) }}</p>
+              <p class="artists">Description: {{ user.description.substr(0, 40) }} [...]</p>
+            </div> -->
         </div>
 
     </div>
@@ -39,10 +33,10 @@ import { ref, onBeforeMount, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 import useStoreHelper from '@/use/useStoreHelper'
-import GoogleService from '@/service/GoogleService'
+import UsersService from '@/service/UserService'
 
 export default {
-  props: ['id'],
+//   props: ['id'],
   setup(props) {
     const isLoading = ref(true)
     const refId = ref(props.id)
@@ -50,38 +44,26 @@ export default {
     const router = useRouter()
     const { 
       store,
-      getStoreGoogleToken,
-      getStoreYoutubePlaylists,
-      getStorePlaylistItems,
+      getStoreConnectedUsers,
+      setStoreConnectedUsers,
     } = useStoreHelper()
 
     /* ------- vue hooks */
     onBeforeMount(async () => {
-      console.log('Playlist | onBeforeMount')
-      console.log('props', props)
-      if (getStoreYoutubePlaylists.value.exists) {
-        playlist.value = getPlaylist(props.id)
-        console.log('playlist.value', playlist.value)
-        const token = getStoreGoogleToken.value.value.access_token
-        const items = await fetchPlaylistItems(token, props.id)
-        console.log('items', items)
-        const playlistId = props.id
-        store.dispatch('google/setYoutubePlaylistItems', { playlistId, items })
+      console.log('Compare | onBeforeMount')
+    //   console.log('props', props)
+    //   if () {
         isLoading.value = false
-      } else {
-        console.log('store has been reset, back to /')
-        router.push('/')
-      }
+    //   } else {
+    //     console.log('store has been reset, back to /')
+    //     router.push('/')
+    //   }
     })
     
     /* ------- functions */
-    function getPlaylist(id) {
-      console.log('getPlaylist id:', id)      
-      return getStoreYoutubePlaylists.value.value.find(p => p.id === id)
-    }
-    
+
     // fetch
-    async function fetchPlaylistItems(token, playlistId) {
+    async function fetchConnectedUsers(token, playlistId) {
       const data = process.env.NODE_ENV === 'development'
       ? await GoogleService.getPlaylistItems(token, playlistId)
       : await GoogleService.getPlaylistItems(token, playlistId)
@@ -96,17 +78,13 @@ export default {
 
     return {
       isLoading,
-      refId,
-      playlist,
       router,
       
       store,
-      getStoreGoogleToken,
-      getStoreYoutubePlaylists,
-      getStorePlaylistItems,
-
-      getPlaylist,
-      fetchPlaylistItems,
+      getStoreConnectedUsers,
+      setStoreConnectedUsers,
+   
+      fetchConnectedUsers,
 
       goBack,
     }

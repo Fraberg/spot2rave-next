@@ -22,9 +22,9 @@ router.get("/login", function(req, res) {
 
 router.get("/callback", async function(req, res) {
   console.log("/callback");
-  console.log('req.query', req.query);
-  console.log('req.query.access_token', req.query.access_token);
-  console.log('req.params', req.params);
+  // console.log('req.query', req.query);
+  // console.log('req.query.access_token', req.query.access_token);
+  // console.log('req.params', req.params);
   const uri = process.env.CLIENT_GOOGLE;
   res.redirect(uri + "/");
 });

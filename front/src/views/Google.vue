@@ -1,7 +1,7 @@
 <template>
     <p class="nice">Nice to meet you,</p>
   <h1 class="name">{{ getStoreGoogleUsername.value }}</h1>
-
+  <!-- <h1 class="name">{{ getStoreGoogleToken.value }}</h1> -->
   <p class="info">See below your playlists</p>
   <p class="info">⬇️</p>
   

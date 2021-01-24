@@ -15,6 +15,9 @@ app.use('/api/spotify', spotify);
 const google = require('./routes/api/google');
 app.use('/api/google', google);
 
+const users = require('./routes/api/users');
+app.use('/api/users', users);
+
 const ticketmaster = require('./routes/api/ticketmaster');
 app.use('/api/ticketmaster', ticketmaster);
 

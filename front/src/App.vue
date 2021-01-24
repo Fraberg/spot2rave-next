@@ -16,7 +16,7 @@
       </p>
       <a class="state" href="https://vuex.vuejs.org/api/">WTF is vuex?</a>
       <!-- <br> -->
-      <a class="state" href="https://www.linkedin.com/in/francis-berger-a2404094/">any feedback? plzz tell me</a>
+      <!-- <a class="state" href="https://www.linkedin.com/in/francis-berger-a2404094/">any feedback? plzz tell me</a> -->
       </span>
   </div>
 
@@ -24,14 +24,15 @@
     <router-link :to="{ name: 'Home' }"> 🏠 Home </router-link> 
     <span v-if="getStoreToken.exists">
       <router-link :to="{ name: 'Me', params: { accesstoken: getStoreToken.value } }"> | 😎 Me </router-link>
-      <router-link  :to="{ name: 'Events' }"> | 📅 Events </router-link>
-      <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>      
+      <!-- <router-link  :to="{ name: 'Events' }"> | 📅 Events </router-link> -->
+      <!-- <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>       -->
     </span>
     <span v-if="getStoreGoogleToken.exists">
       <router-link :to="{ name: 'Google' }"> | 😎 YM </router-link>
       <!-- <router-link  :to="{ name: 'Events' }"> | 📅 Events </router-link> -->
-      <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>      
+      <!-- <router-link :to="{ name: 'More' }"> | 🍑 More </router-link>       -->
     </span>
+    <router-link :to="{ name: 'Compare' }"> | 👀 Compare </router-link> 
   </div>
   
   <router-view />

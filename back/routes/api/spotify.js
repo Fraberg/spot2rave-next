@@ -21,7 +21,7 @@ router.get("/login", function(req, res) {
   );
 });
 
-router.get("/callback", function(req, res) {
+router.get("/callback", async (req, res) => {
   console.log("/callback");
   // 1 ------ get token
   let code = req.query.code || null;
@@ -42,16 +42,41 @@ router.get("/callback", function(req, res) {
     },
     json: true
   };
+  const users = await loadUserCollection();
   let access_token;
   request.post(authOptions, function(error, response, body) {
     access_token = body.access_token;
-    // console.log("access_token:", access_token);
-    // 2 ------ send token back to front-end
+    // 2 ------ get spotify user
+    // ...
+    // 3 ------ store user
+    const insertion = await users.insertOne({
+      id: req.body.id,
+      name: req.body.name,
+      token: req.body.token,
+      kind: req.body.kind,
+      expires_in: req.body.expires_in,
+      type: req.body.type,
+      scope: req.body.scope,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+    // 4 ------ send token back to front-end
     let uri = process.env.CLIENT_ME;
-    // console.log("redirect uri:", uri  + "/" + access_token);
     res.redirect(uri + "/" + access_token);
-    // res.redirect(uri + "?access_token=" + access_token);
   });
 });
+
+// helper
+async function loadUserCollection() {
+  const user = process.env.MONGODB_USER;
+  const password = process.env.MONGODB_PASSWORD;
+  const dbName = process.env.MONGODB_DBNAME;
+  const connection_string = `mongodb+srv://${user}:${password}@cluster0.4vp0x.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+  const client = await mongodb.MongoClient.connect(connection_string, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+  return client.db(dbName).collection("users");
+}
 
 module.exports = router;

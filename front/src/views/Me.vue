@@ -1,5 +1,6 @@
 <template>
   <p class="nice">Nice to meet you,</p>
+  <h1 class="name">{{ getStoreToken.value }},</h1>
   <h1 class="name">{{ getStoreUser.value.display_name }},</h1>
 
   <p class="info">Here is you <span class="green bold">top {{ showTracks ? getStoreTopTracks.value.length : getStoreTopArtists.value.length }} spotify</span> {{ showTracks ? 'tracks 🎵' : 'artists 👨‍🎤' }}</p>
@@ -94,9 +95,7 @@ export default {
     onBeforeMount(async () => {
       console.log('Me | onBeforeMount')
       // console.log('props', props)
-      // console.log('route.query', route.query)
-      // console.log('route.params', route.params)
-      if (props.accesstoken && !store.state.spotify.accesToken.exists) {
+      if (props.accesstoken && getStoreToken.value.exists === false) {
         setStoreToken(props.accesstoken)
         // User
         const user = await fetchUser(props.accesstoken)

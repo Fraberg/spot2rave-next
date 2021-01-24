@@ -7,6 +7,7 @@ import Track from '@/views/Track.vue'
 import Playlist from '@/views/Playlist.vue'
 import Artist from '@/views/Artist.vue'
 import More from '@/views/More.vue'
+import Compare from '@/views/Compare.vue'
 import Events from '@/views/Events.vue'
 
 const routes = [
@@ -58,6 +59,11 @@ const routes = [
     path: '/events',
     name: 'Events',
     component: Events
+  },
+  {
+    path: '/compare',
+    name: 'Compare',
+    component: Compare
   }
 ]
 
