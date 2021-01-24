@@ -8,13 +8,11 @@
         <h1>{{ playlist.title }}</h1>
         <img class="image" :src="playlist.image_default" />
         <div class="name-artists-pop">
-          <p class="artists">{{ playlist.itemCount }}</p>
-          <p class="name">{{ playlist.publishedAt }}</p>
+          <p class="artists">{{ playlist.itemCount }} items</p>
         </div>
 
-        <!-- {{ getStorePlaylistItems }} -->
         <div 
-          v-for="(item, index) in getStorePlaylistItems.value"
+          v-for="(item, index) in getStorePlaylistItems.value[refId]"
           :key="item.id"
           class="card"
           :item="item"
@@ -23,9 +21,9 @@
             <p class="index">{{ item.position + 1 }}</p>
             <img class="image" :src="item.image_default" />
             <div class="name-artists-pop">
-              <p class="name">{{ item.title }}</p>
-              <p class="artists">{{ item.description }} Item(s)</p>
-              <p class="popularity">User: {{ item.publishedAt }}</p>
+              <p class="name">{{ item.title.substr(0, 40) }}</p>
+              <p class="artists">Description: {{ item.description.substr(0, 40) }} [...]</p>
+              <!-- <p class="popularity">Date: {{ item.publishedAt }}</p> -->
             </div>
         </div>
 
@@ -67,7 +65,8 @@ export default {
         const token = getStoreGoogleToken.value.value.access_token
         const items = await fetchPlaylistItems(token, props.id)
         console.log('items', items)
-        store.dispatch('google/setYoutubePlaylistItems', items)
+        const playlistId = props.id
+        store.dispatch('google/setYoutubePlaylistItems', { playlistId, items })
         isLoading.value = false
       } else {
         console.log('store has been reset, back to /')
@@ -77,20 +76,16 @@ export default {
     
     /* ------- functions */
     function getPlaylist(id) {
-      console.log('getPlaylist id:', id)
-
-      console.log('store.state.google.playlists:', store.state.google.playlists.value)
-
-      console.log('getStoreYoutubePlaylists.value.value:', getStoreYoutubePlaylists.value.value)
-      
+      console.log('getPlaylist id:', id)      
       return getStoreYoutubePlaylists.value.value.find(p => p.id === id)
     }
     
     // fetch
     async function fetchPlaylistItems(token, playlistId) {
       const data = process.env.NODE_ENV === 'development'
-      ? await GoogleService.getMockPlaylistItems(token, playlistId)
+      ? await GoogleService.getPlaylistItems(token, playlistId)
       : await GoogleService.getPlaylistItems(token, playlistId)
+      // ? await GoogleService.getMockPlaylistItems(token, playlistId)
       return data
     }
 
@@ -129,4 +124,58 @@ export default {
   margin: auto;
   padding: 10px;
 }
+  .card {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    vertical-align: middle;
+    margin: 10px 0px;
+    padding: 15px 0px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+
+    .index {
+      flex: 0 0 40px;
+      min-width: 30px;
+    }
+    .image {
+      flex: 0 0 auto;
+      width: 100px;
+      margin-right: 15px;
+      border-radius: 4px;
+    }
+    .name-artists-pop {
+      flex: 1;
+      height: 100px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: baseline;
+
+      .artists {
+        font-size: 1rem;
+        font-weight: normal;
+      }
+      .name {
+        font-size: 1rem;
+        font-weight: bold;
+      }
+      .popularity {
+        font-size: 0.7rem;
+        font-weight: lighter;
+      }
+    }
+    .trackvue {
+      padding: 10px;
+      flex: 0 0 60px;
+    }
+    transition-delay: 10ms;
+    transition: background-color 150ms linear;
+  }
+  .card:hover {
+    background-color: #c20000;
+    color: white;
+  }
 </style>

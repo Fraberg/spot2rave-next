@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require("path")
 
 module.exports = {
   outputDir: path.resolve(__dirname, "../back/public"),
@@ -11,6 +11,6 @@ module.exports = {
     }
   },
   chainWebpack: config => {
-    config.performance.maxEntrypointSize(400000).maxAssetSize(400000);
+    config.performance.maxEntrypointSize(400000).maxAssetSize(400000)
   }
-};
+}

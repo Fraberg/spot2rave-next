@@ -72,8 +72,17 @@ class GoogleService {
       axios
         .get(playlistItemsEndpoint)
         .then(res => {
-          // console.log(JSON.stringify(res.data))
-          resolve(res.data)
+          let items = res.data.items.map(item => ({
+            id: item.id,
+            title: item.snippet.title,
+            playlistId: item.snippet.playlistId,
+            description: item.snippet.description,
+            image_default: item.snippet.thumbnails.default.url,
+            publishedAt: item.snippet.publishedAt,
+            position: item.snippet.position,
+          }))
+          items = items.sort((a, b) => parseFloat(a.position) - parseFloat(b.position))
+          resolve(items)
         })
         .catch(err => {
           console.log('err:', err)
@@ -98,7 +107,7 @@ class GoogleService {
         publishedAt: item.snippet.publishedAt,
         position: item.snippet.position,
       }))
-      // items = items.sort((a, b) => parseFloat(b.itemCount) - parseFloat(a.itemCount))
+      items = items.sort((a, b) => parseFloat(a.position) - parseFloat(b.position))
       resolve(items)
     })
   }

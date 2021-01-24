@@ -35,22 +35,19 @@ const mutations = {
     state.playlists.exists = true
     console.log('Store | editYoutubePlaylists')
   },
-  editPlaylistItems(state, items) {
-    // if (state.playlistItems.exists) {
-    //   return
-    // }
-    // items: { index: integer, track: {}}
-    // if (Object.keys(state.playlistItems.value).some(id => id == playlistId)) {
-    //   // state.playlistItems.value[playlistId].push(items)
-    //   state.playlistItems.value[playlistId] = items
-    // } else {
-      // state.playlistItems.value[playlistId] = items
-    // }
-    // state.playlistItems.value = { playlistId: items }
-    state.playlistItems.value = items
+  editPlaylistItems(state, { playlistId, items }) {
+    if (state.playlistItems.exists === false) {
+      state.playlistItems.value = {}
+    }
+    if (!(Object.keys(state.playlistItems.value).includes(playlistId))) {
+      state.playlistItems.value[playlistId] = {}
+    }
+    for (let [key, value] of Object.entries(items)) {
+      // console.log(key, value)
+      state.playlistItems.value[playlistId][key] = value
+    }
     state.playlistItems.exists = true
-    console.log('Store | PlaylistItems')
-    console.log('Store | state.playlistItems =', state.playlistItems)
+    console.log('Store | state.playlistItems.value[playlistId].length', state.playlistItems.value[playlistId].length)
   },
 }
 
@@ -65,8 +62,8 @@ const actions = {
   setYoutubePlaylists ({ commit }, playlists) {
     commit('editYoutubePlaylists', playlists)
   },
-  setYoutubePlaylistItems ({ commit }, items) {
-    commit('editPlaylistItems', items)
+  setYoutubePlaylistItems ({ commit }, { playlistId, items }) {
+    commit('editPlaylistItems', { playlistId, items })
   },
 }
 

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.0440dd5cde092c2472e505adca6f69be.js"
+  "/precache-manifest.d2383afc5422e2cc349670915a8d2617.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "Spotitops"});
